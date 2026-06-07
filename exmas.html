@@ -1,0 +1,2799 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>امتحانات المحاسبة المالية 2 – إيمان</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080c14;
+      --surface: #0f1623;
+      --surface2: #17213a;
+      --surface3: #1d2d4f;
+      --accent: #6366f1;
+      --accent2: #22d3ee;
+      --accent3: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #475569;
+      --border: rgba(255, 255, 255, 0.06);
+      --exam1: #6366f1;
+      --exam2: #22d3ee;
+      --exam3: #f59e0b;
+      --exam4: #ec4899;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #080c14 0%, #0d1730 50%, #080c14 100%);
+      padding: 60px 20px 50px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #a5b4fc;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: clamp(26px, 4.5vw, 48px);
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      color: var(--text2);
+      font-size: 15px;
+      max-width: 580px;
+      margin: 0 auto 28px;
+      line-height: 1.8;
+    }
+
+    .exam-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .exam-tab {
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--surface);
+      color: var(--text2);
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .exam-tab:hover {
+      background: var(--surface2);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .exam-tab.active {
+      color: white;
+      border-color: currentColor;
+    }
+
+    .exam-tab[data-exam="1"].active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--exam1);
+      color: #a5b4fc;
+    }
+
+    .exam-tab[data-exam="2"].active {
+      background: rgba(34, 211, 238, 0.2);
+      border-color: var(--exam2);
+      color: #67e8f9;
+    }
+
+    .exam-tab[data-exam="3"].active {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: var(--exam3);
+      color: #fcd34d;
+    }
+
+    .exam-tab[data-exam="4"].active {
+      background: rgba(236, 72, 153, 0.2);
+      border-color: var(--exam4);
+      color: #f9a8d4;
+    }
+
+    .diff-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 50px;
+      font-size: 11px;
+      margin-right: 6px;
+    }
+
+    .hard {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+    }
+
+    .medium {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fcd34d;
+    }
+
+    .main {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .exam-page {
+      display: none;
+    }
+
+    .exam-page.active {
+      display: block;
+    }
+
+    .exam-header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exam-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      opacity: 0.05;
+      transform: translate(50px, -50px);
+    }
+
+    .e1 .exam-header::before {
+      background: var(--exam1);
+    }
+
+    .e2 .exam-header::before {
+      background: var(--exam2);
+    }
+
+    .e3 .exam-header::before {
+      background: var(--exam3);
+    }
+
+    .e4 .exam-header::before {
+      background: var(--exam4);
+    }
+
+    .exam-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .exam-num {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .e1 .exam-num {
+      background: var(--exam1);
+    }
+
+    .e2 .exam-num {
+      background: var(--exam2);
+    }
+
+    .e3 .exam-num {
+      background: var(--exam3);
+    }
+
+    .e4 .exam-num {
+      background: var(--exam4);
+    }
+
+    .exam-header h2 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .exam-header .meta-info {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .meta-chip {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* QUESTIONS */
+    .question-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .question-header {
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .question-header:hover {
+      background: var(--surface2);
+    }
+
+    .q-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .e1 .q-num {
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+    }
+
+    .e2 .q-num {
+      background: rgba(34, 211, 238, 0.2);
+      color: #67e8f9;
+    }
+
+    .e3 .q-num {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fcd34d;
+    }
+
+    .e4 .q-num {
+      background: rgba(236, 72, 153, 0.2);
+      color: #f9a8d4;
+    }
+
+    .q-text {
+      flex: 1;
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .q-sub {
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text2);
+      margin-top: 3px;
+    }
+
+    .expand-btn {
+      color: var(--text3);
+      font-size: 18px;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .question-header.open .expand-btn {
+      transform: rotate(180deg);
+    }
+
+    .question-body {
+      display: none;
+      padding: 0 22px 22px;
+      border-top: 1px solid var(--border);
+    }
+
+    .question-body.open {
+      display: block;
+    }
+
+    .data-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 14px 0;
+    }
+
+    .data-box h4 {
+      font-size: 13px;
+      color: var(--text3);
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .data-box p,
+    .data-box li {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.85;
+    }
+
+    .data-box ul {
+      padding-right: 18px;
+    }
+
+    .data-box li {
+      list-style: disc;
+      margin-bottom: 4px;
+    }
+
+    .solution-toggle {
+      background: none;
+      border: 1px dashed rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .solution-toggle:hover {
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .solution-toggle.shown {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.6);
+    }
+
+    .solution-box {
+      display: none;
+    }
+
+    .solution-box.shown {
+      display: block;
+    }
+
+    .solution-header {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.05));
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px 12px 0 0;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #34d399;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .solution-content {
+      background: var(--surface);
+      border: 1px solid rgba(16, 185, 129, 0.12);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+
+    .solution-content p {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .solution-content strong {
+      color: var(--text);
+    }
+
+    /* JOURNAL TABLE */
+    .journal-wrap {
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+
+    .journal-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 500px;
+    }
+
+    .journal-table th {
+      background: var(--surface3);
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-weight: 600;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .journal-table td {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--surface);
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    .journal-table tr:hover td {
+      background: var(--surface2);
+    }
+
+    .journal-table .acc-num {
+      color: #a5b4fc;
+      font-weight: 700;
+      font-family: monospace;
+    }
+
+    .journal-table .debit {
+      color: #4ade80;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .journal-table .credit {
+      color: #f87171;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .journal-table .section-row td {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text3);
+      text-align: center;
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    /* INVOICE */
+    .inv-box {
+      background: var(--surface3);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      font-size: 13px;
+      display: inline-block;
+      min-width: 280px;
+    }
+
+    .inv-box .title {
+      color: #a5b4fc;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .inv-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      color: var(--text2);
+      gap: 20px;
+    }
+
+    .inv-row.sub {
+      color: var(--text3);
+      font-size: 12px;
+    }
+
+    .inv-row.neg {
+      color: #f87171;
+    }
+
+    .inv-row.bold {
+      font-weight: 700;
+      color: #34d399;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+      padding-top: 6px;
+    }
+
+    /* HIGHLIGHT */
+    .hl {
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 13px;
+      line-height: 1.75;
+      border-right: 3px solid;
+    }
+
+    .hl.blue {
+      background: rgba(99, 102, 241, 0.08);
+      border-color: #6366f1;
+      color: #a5b4fc;
+    }
+
+    .hl.green {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: #10b981;
+      color: #6ee7b7;
+    }
+
+    .hl.amber {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: #f59e0b;
+      color: #fcd34d;
+    }
+
+    .hl.red {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+
+    .score-chip {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    .sc-hard {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+    }
+
+    .sc-med {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fcd34d;
+    }
+
+    .points {
+      color: var(--text3);
+      font-size: 12px;
+    }
+
+    .summary-steps {
+      counter-reset: step;
+      margin: 12px 0;
+    }
+
+    .s-step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    .s-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .btn:hover {
+      background: #1e7e34;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .btn:hover {
+      background: #1e7e34;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+    <a href="drous.html" class="btn">الرجوع إلى الصفحة الرئيسية</a>
+    <div class="hero-badge">🎯 امتحانات تدريبية — المحاسبة المالية 2</div>
+    <h1>4 امتحانات بالحل الكامل</h1>
+    <p>امتحانان صعبان وامتحانان متوسطان — كل الحلول مفصّلة خطوة بخطوة. اضغط على الامتحان لتبدأ.</p>
+    <div class="exam-tabs">
+      <button class="exam-tab active" data-exam="1" onclick="showExam(1)">
+        <span class="diff-badge hard">صعب</span> امتحان 1
+      </button>
+      <button class="exam-tab" data-exam="2" onclick="showExam(2)">
+        <span class="diff-badge hard">صعب</span> امتحان 2
+      </button>
+      <button class="exam-tab" data-exam="3" onclick="showExam(3)">
+        <span class="diff-badge medium">متوسط</span> امتحان 3
+      </button>
+      <button class="exam-tab" data-exam="4" onclick="showExam(4)">
+        <span class="diff-badge medium">متوسط</span> امتحان 4
+      </button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- ============ EXAM 1: HARD ============ -->
+    <div class="exam-page e1 active" id="exam-1">
+      <div class="exam-header">
+        <div class="exam-meta">
+          <div class="exam-num">1</div>
+          <div>
+            <h2>امتحان صعب — مردودات + تسبيقات + تخفيضات + أغلفة</h2>
+            <div class="meta-info">
+              <div class="meta-chip">⏱ 90 دقيقة</div>
+              <div class="meta-chip">📋 4 أسئلة</div>
+              <div class="meta-chip" style="color:#fca5a5">🔴 مستوى صعب</div>
+            </div>
+          </div>
+        </div>
+        <p style="color:var(--text2);font-size:14px;line-height:1.7;">يشمل هذا الامتحان كل الدروس الأساسية في وحدة
+          محاسبة المخزونات. التعامل مع الرسم على القيمة المضافة TVA واجب في كل العمليات.</p>
+      </div>
+
+      <!-- Q1 -->
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">1</div>
+          <div class="q-text">
+            مردودات المشتريات والمبيعات — جرد دائم
+            <span class="q-sub">TVA 19% | 5 نقاط</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>بيانات المؤسسة "النور" خلال 2024</h4>
+            <ul>
+              <li>03/05: شراء بضاعة بـ 200,000 دج HT على الحساب (TVA 19%)</li>
+              <li>03/07: استلام البضاعة المشتراة في 03/05</li>
+              <li>03/12: إرجاع بضاعة للمورد تكلفتها 30,000 دج HT — أرسل المورد فاتورة المردودات</li>
+              <li>03/15: باعت بضاعة بـ 350,000 دج HT بصك بنكي (تكلفتها 240,000 دج)</li>
+              <li>03/16: سلّمت البضاعة للزبون</li>
+              <li>03/20: أرجع الزبون جزءًا من البضاعة المباعة قيمتها 50,000 دج HT (تكلفتها 34,000 دج)</li>
+              <li>03/25: سدّد المورد مبلغ مردودات المشتريات بصك</li>
+            </ul>
+          </div>
+          <p style="color:#fcd34d;font-size:13px;margin-bottom:10px;"><strong>المطلوب:</strong> سجّل جميع العمليات في
+            اليومية علمًا أن المؤسسة تطبق الجرد الدائم.</p>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل الكامل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل الكامل</div>
+            <div class="solution-content">
+              <div class="hl amber">حساب TTC الشراء: 200,000 × 1.19 = 238,000 | حساب TTC المردودات: 30,000 × 1.19 =
+                35,700</div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>03/05</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة مخزنة</td>
+                    <td class="debit">200,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">44566</td>
+                    <td>TVA مسترجعة</td>
+                    <td class="debit">38,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td></td>
+                    <td class="credit">238,000</td>
+                  </tr>
+                  <tr>
+                    <td>03/07</td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td class="debit">200,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة مخزنة</td>
+                    <td></td>
+                    <td class="credit">200,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">إرجاع بضاعة للمورد (مردودات مشتريات)</td>
+                  </tr>
+                  <tr>
+                    <td>03/12</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td class="debit">30,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">30,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td class="debit">35,700</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة مخزنة</td>
+                    <td></td>
+                    <td class="credit">30,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">44566</td>
+                    <td>TVA مسترجعة</td>
+                    <td></td>
+                    <td class="credit">5,700</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">بيع بضاعة بصك</td>
+                  </tr>
+                  <tr>
+                    <td>03/15</td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td class="debit">416,500</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">700</td>
+                    <td>مبيعات البضاعة</td>
+                    <td></td>
+                    <td class="credit">350,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة</td>
+                    <td></td>
+                    <td class="credit">66,500</td>
+                  </tr>
+                  <tr>
+                    <td>03/16</td>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td class="debit">240,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">240,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">مردودات مبيعات — إرجاع الزبون</td>
+                  </tr>
+                  <tr>
+                    <td>03/20</td>
+                    <td class="acc-num">700</td>
+                    <td>مبيعات البضاعة</td>
+                    <td class="debit">50,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة</td>
+                    <td class="debit">9,500</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td></td>
+                    <td class="credit">59,500</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td class="debit">34,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td></td>
+                    <td class="credit">34,000</td>
+                  </tr>
+                  <tr>
+                    <td>03/25</td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td class="debit">35,700</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td></td>
+                    <td class="credit">35,700</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">2</div>
+          <div class="q-text">
+            تسبيقات + تخفيضات مركّبة
+            <span class="q-sub">TVA 19% | مركّب — 6 نقاط</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>عمليات المؤسسة "الأمل" خلال السنة N</h4>
+            <ul>
+              <li>10/01: دفعت تسبيقًا للمورد Z بمبلغ 50,000 دج بصك</li>
+              <li>10/15: استلمت الفاتورة والبضاعة من المورد Z: سعر قبل تخفيض 300,000 دج HT | تنزيل 5% | خصم مالي 2% |
+                TVA 19%</li>
+              <li>10/20: سددت باقي مبلغ الفاتورة بصك</li>
+              <li>11/01: باعت منتجات تامة بـ 500,000 دج HT على الحساب | تنزيل 3% | خصم مالي 1% | TVA 19% | تكلفة الإنتاج
+                380,000 دج</li>
+              <li>11/05: أرسلت للزبون فاتورة إنقاص بخصم مالي 2% (على الصافي التجاري فقط)</li>
+            </ul>
+          </div>
+          <p style="color:#fcd34d;font-size:13px;margin-bottom:10px;"><strong>المطلوب:</strong> ارسم كل الفواتير ثم سجّل
+            القيود في يومية المؤسسة (عند البائع والمشتري).</p>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل الكامل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل الكامل</div>
+            <div class="solution-content">
+              <p><strong>فاتورة الشراء من المورد Z:</strong></p>
+              <div class="inv-box">
+                <div class="title">فاتورة الشراء</div>
+                <div class="inv-row"><span>السعر HT</span><span>300,000</span></div>
+                <div class="inv-row neg"><span>تنزيل 5%</span><span>- 15,000</span></div>
+                <div class="inv-row bold"><span>صافي تجاري</span><span>285,000</span></div>
+                <div class="inv-row neg"><span>خصم مالي 2%</span><span>- 5,700</span></div>
+                <div class="inv-row bold"><span>صافي مالي</span><span>279,300</span></div>
+                <div class="inv-row"><span>TVA 19%</span><span>53,067</span></div>
+                <div class="inv-row bold"><span>TTC</span><span>332,367</span></div>
+                <div class="inv-row neg"><span>تسبيق</span><span>- 50,000</span></div>
+                <div class="inv-row bold"><span>الصافي الواجب دفعه</span><span>282,367</span></div>
+              </div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>10/01</td>
+                    <td class="acc-num">4091</td>
+                    <td>تسبيقات مسددة مسبقًا</td>
+                    <td class="debit">50,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td></td>
+                    <td class="credit">50,000</td>
+                  </tr>
+                  <tr>
+                    <td>10/15</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td class="debit">285,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">44566</td>
+                    <td>TVA مسترجعة</td>
+                    <td class="debit">53,067</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">768</td>
+                    <td>نواتج مالية أخرى (خصم مالي)</td>
+                    <td></td>
+                    <td class="credit">5,700</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td></td>
+                    <td class="credit">282,367</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4091</td>
+                    <td>تسبيقات مسددة مسبقًا</td>
+                    <td></td>
+                    <td class="credit">50,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td class="debit">285,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td></td>
+                    <td class="credit">285,000</td>
+                  </tr>
+                  <tr>
+                    <td>10/20</td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td class="debit">282,367</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td></td>
+                    <td class="credit">282,367</td>
+                  </tr>
+                </table>
+              </div>
+              <p><strong>فاتورة البيع للزبون:</strong></p>
+              <div class="inv-box">
+                <div class="title">فاتورة البيع</div>
+                <div class="inv-row"><span>500,000 HT</span><span></span></div>
+                <div class="inv-row neg"><span>تنزيل 3%</span><span>- 15,000</span></div>
+                <div class="inv-row bold"><span>صافي تجاري</span><span>485,000</span></div>
+                <div class="inv-row neg"><span>خصم مالي 1%</span><span>- 4,850</span></div>
+                <div class="inv-row bold"><span>صافي مالي</span><span>480,150</span></div>
+                <div class="inv-row"><span>TVA 19%</span><span>91,228.5</span></div>
+                <div class="inv-row bold"><span>TTC</span><span>571,378.5</span></div>
+              </div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>11/01</td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td class="debit">571,378.5</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">668</td>
+                    <td>أعباء مالية أخرى</td>
+                    <td class="debit">4,850</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">701</td>
+                    <td>مبيعات منتجات تامة الصنع</td>
+                    <td></td>
+                    <td class="credit">485,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة</td>
+                    <td></td>
+                    <td class="credit">91,228.5</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">72</td>
+                    <td>إنتاج مخزن</td>
+                    <td class="debit">380,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">355</td>
+                    <td>منتجات تامة الصنع</td>
+                    <td></td>
+                    <td class="credit">380,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">فاتورة الإنقاص (خصم مالي 2% في ورقة مستقلة)</td>
+                  </tr>
+                  <tr>
+                    <td>11/05</td>
+                    <td class="acc-num">768</td>
+                    <td>نواتج مالية أخرى (2% × 485,000 = 9,700)</td>
+                    <td class="debit">9,700</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة (9,700 × 19% = 1,843)</td>
+                    <td class="debit">1,843</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td></td>
+                    <td class="credit">11,543</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="hl amber">⚠️ في فاتورة الإنقاص المستقلة للخصم المالي: حـ/768 يكون مدينًا عند البائع (عكس الوضع
+                العادي)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">3</div>
+          <div class="q-text">
+            الأغلفة المتداولة — دورة كاملة
+            <span class="q-sub">TVA 19% | 5 نقاط</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>عمليات المؤسسة خلال السنة</h4>
+            <ul>
+              <li>01/03: اشترت بضاعة بـ 80,000 دج HT بصك مع أغلفة متداولة بـ 8,000 دج | TVA 19%</li>
+              <li>01/10: باعت منتجات تامة بـ 120,000 دج HT نقدًا، تكلفة إنتاجها 95,000 دج، مرفقة بأغلفة متداولة بـ 5,000
+                دج | TVA 19%</li>
+              <li>01/18: أرجعت 90% من الأغلفة للمورد بصك (10% معطوبة)</li>
+              <li>02/10: أرجع الزبون 60% من الأغلفة سليمة والباقي معطوب، التسديد نقدًا</li>
+              <li>03/15: قرّرت المؤسسة الاحتفاظ بالأغلفة غير المُرجعة من الزبون (اشترتها)</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل الكامل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل الكامل</div>
+            <div class="solution-content">
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">01/03 — شراء بضاعة مع أغلفة متداولة (HT: 80,000 + TVA 15,200)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>01/03</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td class="debit">80,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4096</td>
+                    <td>أمانات مدفوعة</td>
+                    <td class="debit">8,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4456</td>
+                    <td>TVA مسترجعة</td>
+                    <td class="debit">15,200</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td></td>
+                    <td class="credit">103,200</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td class="debit">80,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td></td>
+                    <td class="credit">80,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">01/10 — بيع منتجات تامة مع أغلفة (120,000 × 1.19 = 142,800)</td>
+                  </tr>
+                  <tr>
+                    <td>01/10</td>
+                    <td class="acc-num">53</td>
+                    <td>الصندوق</td>
+                    <td class="debit">147,800</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">701</td>
+                    <td>مبيعات منتجات تامة</td>
+                    <td></td>
+                    <td class="credit">120,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4196</td>
+                    <td>أمانات مستلمة</td>
+                    <td></td>
+                    <td class="credit">5,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة</td>
+                    <td></td>
+                    <td class="credit">22,800</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">72</td>
+                    <td>إنتاج مخزن</td>
+                    <td class="debit">95,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">355</td>
+                    <td>منتجات تامة</td>
+                    <td></td>
+                    <td class="credit">95,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">01/18 — إرجاع 90% أغلفة للمورد (90% × 8,000 = 7,200 | معطوبة
+                      800)</td>
+                  </tr>
+                  <tr>
+                    <td>01/18</td>
+                    <td class="acc-num">512</td>
+                    <td>البنك (استرجاع 90%)</td>
+                    <td class="debit">7,200</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">6136</td>
+                    <td>نقص في مواد التغليف (10% معطوبة)</td>
+                    <td class="debit">800</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4096</td>
+                    <td>أمانات مدفوعة</td>
+                    <td></td>
+                    <td class="credit">8,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">02/10 — الزبون يرجع 60% سليمة + 40% معطوبة (5,000 × 60% = 3,000
+                      | 40% = 2,000)</td>
+                  </tr>
+                  <tr>
+                    <td>02/10</td>
+                    <td class="acc-num">4196</td>
+                    <td>أمانات مستلمة</td>
+                    <td class="debit">5,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">53</td>
+                    <td>الصندوق (إرجاع 60%)</td>
+                    <td></td>
+                    <td class="credit">3,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">708</td>
+                    <td>نواتج الأنشطة الملحقة (مقابل 40% معطوبة)</td>
+                    <td></td>
+                    <td class="credit">2,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">03/15 — عدم استرجاع الأغلفة المتبقية (صفر أغلفة متبقية هنا — تم
+                      تسوية الكل)</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="hl green">ملاحظة: لا توجد أغلفة متبقية غير مسوّاة — الزبون أرجع 100% من أغلفته في عمليتين
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q4 HARD -->
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">4</div>
+          <div class="q-text">
+            نهاية الدورة: إهتالك + خسائر قيمة + مخزون
+            <span class="q-sub">تسوية شاملة — 6 نقاط</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>بيانات مؤسسة "النجاح" بتاريخ 31/12/2024</h4>
+            <ul>
+              <li>آلة صناعية اشتريت في 01/07/2021 بـ 480,000 دج تهتلك خطيًا في 4 سنوات</li>
+              <li>في نهاية 2022 تبيّن انخفاض في قيمة الآلة بـ 60,000 دج</li>
+              <li>في نهاية 2023 قيمة الاسترجاع = 90,000 دج (مراجعة الخسارة)</li>
+              <li>مخزون بضاعة حسب الجرد الدائم: محاسبي = 150,000 دج | فعلي = 135,000 دج (الفرق مبرر)</li>
+              <li>زبون مديونية TTC = 71,400 دج | يُحتمل عدم تسديد 30% | (TVA 19%)</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل الكامل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل الكامل</div>
+            <div class="solution-content">
+              <p><strong>أولًا: مخطط الإهتالك</strong></p>
+              <p>VA = 480,000 | n = 4 | T = 25% | A = 120,000/سنة</p>
+              <p>A2021 = 120,000 × 6/12 = 60,000 | A2022 = A2023 = A2024 = 120,000</p>
+              <div class="hl amber">
+                VCN نهاية 2021 = 420,000<br>
+                VCN نهاية 2022 (قبل الخسارة) = 300,000 | بعد الخسارة = 240,000<br>
+                قسط جديد = 240,000 ÷ 2 = 120,000 (نفس المبلغ اتفاقًا)<br>
+                VCN نهاية 2023 = 120,000 | استرجاع: 90,000 − 120,000 = محدود بـ 60,000 (الخسارة المشكّلة)
+              </div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">31/12/2024 — قسط الإهتالك (السنة الأخيرة)</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/24</td>
+                    <td class="acc-num">681</td>
+                    <td>مخصصات الإهتالكات — أصول غير جارية</td>
+                    <td class="debit">60,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">2815</td>
+                    <td>إهتالك معدات صناعية (6 أشهر)</td>
+                    <td></td>
+                    <td class="credit">60,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">تسوية المخزون (انحراف سلبي مبرر = 15,000 دج)</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/24</td>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td class="debit">15,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">15,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">تسوية الزبون: HT = 71,400 ÷ 1.19 = 60,000 | خسارة = 60,000 × 30%
+                      = 18,000</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/24</td>
+                    <td class="acc-num">416</td>
+                    <td>الزبائن المشكوك فيهم</td>
+                    <td class="debit">71,400</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td></td>
+                    <td class="credit">71,400</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">685</td>
+                    <td>مخصصات خسائر القيمة — أصول جارية</td>
+                    <td class="debit">18,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">491</td>
+                    <td>خسائر القيمة عن حسابات الزبائن</td>
+                    <td></td>
+                    <td class="credit">18,000</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end exam 1 -->
+
+    <!-- ============ EXAM 2: HARD ============ -->
+    <div class="exam-page e2" id="exam-2">
+      <div class="exam-header">
+        <div class="exam-meta">
+          <div class="exam-num">2</div>
+          <div>
+            <h2>امتحان صعب — دراسة حالة متكاملة</h2>
+            <div class="meta-info">
+              <div class="meta-chip">⏱ 120 دقيقة</div>
+              <div class="meta-chip">📋 عمليات متسلسلة</div>
+              <div class="meta-chip" style="color:#fca5a5">🔴 مستوى صعب</div>
+            </div>
+          </div>
+        </div>
+        <p style="color:var(--text2);font-size:14px;line-height:1.7;">دراسة حالة شاملة تغطي جميع الدروس في وحدة واحدة
+          متسلسلة — من الشراء حتى نهاية الدورة.</p>
+      </div>
+
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">1</div>
+          <div class="q-text">
+            دراسة حالة: مؤسسة "الفجر" — كل عمليات السنة
+            <span class="q-sub">TVA 19% | جرد دائم | 20 نقطة</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>العمليات</h4>
+            <ul>
+              <li>05/01: دفعت تسبيقًا للمورد Y بـ 30,000 دج بصك</li>
+              <li>05/10: وصلت الفاتورة والبضاعة من المورد Y: HT = 200,000 | تنزيل 4% | TVA 19%</li>
+              <li>05/12: إرجاع بضاعة معيبة للمورد Y قيمتها 10,000 دج HT</li>
+              <li>05/20: سددت باقي الفاتورة بصك</li>
+              <li>06/01: باعت بضاعة بـ 250,000 دج HT على الحساب مع أغلفة متداولة 3,000 دج، تكلفتها 170,000 دج | TVA 19%
+              </li>
+              <li>06/15: أرجع الزبون 70% من الأغلفة سليمة، التسديد بصك</li>
+              <li>07/01: أرجع الزبون بضاعة بـ 20,000 دج HT بسبب عطب</li>
+              <li>12/31: مخزون محاسبي = 80,000 دج | مخزون فعلي = 75,000 دج (غير مبرر)</li>
+              <li>12/31: زبون لديه دين TTC = 59,500 دج يُحتمل عدم تسديد 50%</li>
+              <li>12/31: أجهزة حاسوب بـ 240,000 دج اشتريت 01/01/2022 عمرها 4 سنوات — احسب قسط 2024</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل الكامل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل الكامل</div>
+            <div class="solution-content">
+              <p><strong>فاتورة الشراء من Y:</strong></p>
+              <div class="inv-box">
+                <div class="title">فاتورة الشراء</div>
+                <div class="inv-row"><span>HT</span><span>200,000</span></div>
+                <div class="inv-row neg"><span>تنزيل 4%</span><span>- 8,000</span></div>
+                <div class="inv-row bold"><span>صافي تجاري</span><span>192,000</span></div>
+                <div class="inv-row"><span>TVA 19%</span><span>36,480</span></div>
+                <div class="inv-row bold"><span>TTC</span><span>228,480</span></div>
+                <div class="inv-row neg"><span>تسبيق</span><span>- 30,000</span></div>
+                <div class="inv-row bold"><span>الصافي</span><span>198,480</span></div>
+              </div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>05/01</td>
+                    <td class="acc-num">4091</td>
+                    <td>تسبيقات مدفوعة مسبقًا</td>
+                    <td class="debit">30,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td></td>
+                    <td class="credit">30,000</td>
+                  </tr>
+                  <tr>
+                    <td>05/10</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td class="debit">192,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">44566</td>
+                    <td>TVA مسترجعة</td>
+                    <td class="debit">36,480</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td></td>
+                    <td class="credit">198,480</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4091</td>
+                    <td>تسبيقات مسددة مسبقًا</td>
+                    <td></td>
+                    <td class="credit">30,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td class="debit">192,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td></td>
+                    <td class="credit">192,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">05/12 — مردودات مشتريات (10,000 × 1.19 = 11,900)</td>
+                  </tr>
+                  <tr>
+                    <td>05/12</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td class="debit">10,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">10,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td class="debit">11,900</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td></td>
+                    <td class="credit">10,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">44566</td>
+                    <td>TVA مسترجعة</td>
+                    <td></td>
+                    <td class="credit">1,900</td>
+                  </tr>
+                  <tr>
+                    <td>05/20</td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات (198,480 − 11,900)</td>
+                    <td class="debit">186,580</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td></td>
+                    <td class="credit">186,580</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">06/01 — بيع بضاعة مع أغلفة (250,000 × 1.19 = 297,500)</td>
+                  </tr>
+                  <tr>
+                    <td>06/01</td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td class="debit">300,500</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">700</td>
+                    <td>مبيعات البضاعة</td>
+                    <td></td>
+                    <td class="credit">250,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4196</td>
+                    <td>أمانات مستلمة</td>
+                    <td></td>
+                    <td class="credit">3,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة</td>
+                    <td></td>
+                    <td class="credit">47,500</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td class="debit">170,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">170,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">06/15 — إرجاع 70% أغلفة (70% × 3,000 = 2,100)</td>
+                  </tr>
+                  <tr>
+                    <td>06/15</td>
+                    <td class="acc-num">4196</td>
+                    <td>أمانات مستلمة</td>
+                    <td class="debit">3,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">512</td>
+                    <td>البنك (إرجاع 70%)</td>
+                    <td></td>
+                    <td class="credit">2,100</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">708</td>
+                    <td>نواتج الأنشطة الملحقة (30% معطوبة)</td>
+                    <td></td>
+                    <td class="credit">900</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">07/01 — مردودات مبيعات (20,000 × 1.19 = 23,800)</td>
+                  </tr>
+                  <tr>
+                    <td>07/01</td>
+                    <td class="acc-num">700</td>
+                    <td>مبيعات البضاعة</td>
+                    <td class="debit">20,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة</td>
+                    <td class="debit">3,800</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td></td>
+                    <td class="credit">23,800</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">31/12 — تسوية المخزون (انحراف سلبي غير مبرر = 5,000)</td>
+                  </tr>
+                  <tr>
+                    <td>31/12</td>
+                    <td class="acc-num">657</td>
+                    <td>أعباء استثنائية عن عملية التسيير</td>
+                    <td class="debit">5,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">5,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">31/12 — تسوية الزبون: HT = 59,500÷1.19 = 50,000 | 50% = 25,000
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>31/12</td>
+                    <td class="acc-num">416</td>
+                    <td>الزبائن المشكوك فيهم</td>
+                    <td class="debit">59,500</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td></td>
+                    <td class="credit">59,500</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">685</td>
+                    <td>مخصصات خسائر القيمة</td>
+                    <td class="debit">25,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">491</td>
+                    <td>خسائر القيمة — الزبائن</td>
+                    <td></td>
+                    <td class="credit">25,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">31/12 — إهتالك الحاسوب: A = 240,000 × 25% = 60,000</td>
+                  </tr>
+                  <tr>
+                    <td>31/12</td>
+                    <td class="acc-num">681</td>
+                    <td>مخصصات الإهتالكات — غير جارية</td>
+                    <td class="debit">60,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">2183</td>
+                    <td>إهتالك أجهزة الإعلام الآلي</td>
+                    <td></td>
+                    <td class="credit">60,000</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end exam 2 -->
+
+    <!-- ============ EXAM 3: MEDIUM ============ -->
+    <div class="exam-page e3" id="exam-3">
+      <div class="exam-header">
+        <div class="exam-meta">
+          <div class="exam-num">3</div>
+          <div>
+            <h2>امتحان متوسط — التخفيضات والتسبيقات</h2>
+            <div class="meta-info">
+              <div class="meta-chip">⏱ 60 دقيقة</div>
+              <div class="meta-chip">📋 3 أسئلة</div>
+              <div class="meta-chip" style="color:#fcd34d">🟡 مستوى متوسط</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">1</div>
+          <div class="q-text">
+            تخفيضات تجارية — ضمن الفاتورة وفي فاتورة مستقلة
+            <span class="q-sub">6 نقاط | TVA 19%</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>العمليات</h4>
+            <ul>
+              <li>15/03: شراء بضاعة بـ 400,000 دج HT مع تنزيل 3% ثم حسومات 2% في نفس الفاتورة — على الحساب | TVA 19%
+              </li>
+              <li>22/03: المورد أرسل فاتورة إنقاص بـ 5% كتعويض عن عيب في جودة البضاعة</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل</div>
+            <div class="solution-content">
+              <div class="inv-box">
+                <div class="title">فاتورة الشراء (تخفيضان بالتوالي)</div>
+                <div class="inv-row"><span>HT</span><span>400,000</span></div>
+                <div class="inv-row neg"><span>تنزيل 3%</span><span>- 12,000</span></div>
+                <div class="inv-row bold"><span>صافي 1</span><span>388,000</span></div>
+                <div class="inv-row neg"><span>حسومات 2% × 388,000</span><span>- 7,760</span></div>
+                <div class="inv-row bold"><span>صافي تجاري</span><span>380,240</span></div>
+                <div class="inv-row"><span>TVA 19%</span><span>72,245.6</span></div>
+                <div class="inv-row bold"><span>TTC</span><span>452,485.6</span></div>
+              </div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>15/03</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة (الصافي التجاري)</td>
+                    <td class="debit">380,240</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">44566</td>
+                    <td>TVA مسترجعة</td>
+                    <td class="debit">72,245.6</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td></td>
+                    <td class="credit">452,485.6</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td class="debit">380,240</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td></td>
+                    <td class="credit">380,240</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="inv-box">
+                <div class="title">فاتورة الإنقاص (5% × 380,240)</div>
+                <div class="inv-row"><span>التخفيض</span><span>19,012</span></div>
+                <div class="inv-row"><span>TVA 19%</span><span>3,612.28</span></div>
+                <div class="inv-row bold"><span>TTC</span><span>22,624.28</span></div>
+              </div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>22/03</td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td class="debit">22,624.28</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">609</td>
+                    <td>تخفيضات وتنزيلات متحصل عليها</td>
+                    <td></td>
+                    <td class="credit">19,012</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4456</td>
+                    <td>TVA قابل للاسترجاع</td>
+                    <td></td>
+                    <td class="credit">3,612.28</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="hl blue">📌 لا نُصحّح حساب المخزون عند استلام فاتورة الإنقاص لأنها تُسجّل في حـ/609 وليس في
+                حـ/380</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">2</div>
+          <div class="q-text">
+            التسبيق عند البائع — من الطلبية حتى التسوية
+            <span class="q-sub">6 نقاط | TVA 19%</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>العمليات</h4>
+            <ul>
+              <li>10/02: استلام طلبية شراء بضاعة مع تسبيق 80,000 دج نقدًا</li>
+              <li>10/20: تسليم البضاعة للزبون: HT = 400,000 | تنزيل 2% | TVA 19% | تكلفة البضاعة 280,000 دج</li>
+              <li>10/25: الزبون سدّد الباقي بصك</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل عند البائع</div>
+            <div class="solution-content">
+              <div class="inv-box">
+                <div class="title">فاتورة البيع</div>
+                <div class="inv-row"><span>HT</span><span>400,000</span></div>
+                <div class="inv-row neg"><span>تنزيل 2%</span><span>- 8,000</span></div>
+                <div class="inv-row bold"><span>صافي تجاري</span><span>392,000</span></div>
+                <div class="inv-row"><span>TVA 19%</span><span>74,480</span></div>
+                <div class="inv-row bold"><span>TTC</span><span>466,480</span></div>
+                <div class="inv-row neg"><span>تسبيق</span><span>- 80,000</span></div>
+                <div class="inv-row bold"><span>الصافي</span><span>386,480</span></div>
+              </div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>10/02</td>
+                    <td class="acc-num">53</td>
+                    <td>الصندوق</td>
+                    <td class="debit">80,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4191</td>
+                    <td>تسبيقات ومدفوعات مستلمة</td>
+                    <td></td>
+                    <td class="credit">80,000</td>
+                  </tr>
+                  <tr>
+                    <td>10/20</td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td class="debit">386,480</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4191</td>
+                    <td>تسبيقات مستلمة</td>
+                    <td class="debit">80,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">700</td>
+                    <td>مبيعات البضاعة</td>
+                    <td></td>
+                    <td class="credit">392,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة</td>
+                    <td></td>
+                    <td class="credit">74,480</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td class="debit">280,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">280,000</td>
+                  </tr>
+                  <tr>
+                    <td>10/25</td>
+                    <td class="acc-num">512</td>
+                    <td>البنك</td>
+                    <td class="debit">386,480</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td></td>
+                    <td class="credit">386,480</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">3</div>
+          <div class="q-text">
+            نهاية الدورة — جرد متناوب + أعباء مثبتة مسبقًا
+            <span class="q-sub">8 نقاط</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>بيانات 31/12/2024</h4>
+            <ul>
+              <li>مخزون بداية المدة: بضاعة 120,000 | مواد أولية 85,000</li>
+              <li>مشتريات الفترة: بضاعة 380,000 | مواد أولية 210,000 (الكل مسجّل في حـ/38)</li>
+              <li>مخزون نهاية المدة (جرد مادي): بضاعة 95,000 | مواد أولية 70,000</li>
+              <li>في 01/09 استأجرت مكاتب لمدة سنة بـ 48,000 دج بصك بنكي</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل — جرد متناوب (3 خطوات)</div>
+            <div class="solution-content">
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="section-row">الخطوة 1: إلغاء مخزون بداية المدة</td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td class="debit">120,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">601</td>
+                    <td>مواد أولية مستهلكة</td>
+                    <td class="debit">85,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">120,000</td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">31</td>
+                    <td>مواد أولية</td>
+                    <td></td>
+                    <td class="credit">85,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="section-row">الخطوة 2: ترصيد حـ/38 (إثبات الاستهلاك)</td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td class="debit">380,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">601</td>
+                    <td>مواد أولية مستهلكة</td>
+                    <td class="debit">210,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة مخزنة</td>
+                    <td></td>
+                    <td class="credit">380,000</td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">381</td>
+                    <td>مشتريات مواد أولية</td>
+                    <td></td>
+                    <td class="credit">210,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="section-row">الخطوة 3: إثبات مخزون نهاية المدة</td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td class="debit">95,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">31</td>
+                    <td>مواد أولية</td>
+                    <td class="debit">70,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td></td>
+                    <td class="credit">95,000</td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">601</td>
+                    <td>مواد أولية مستهلكة</td>
+                    <td></td>
+                    <td class="credit">70,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="section-row">الأعباء المثبتة مسبقًا: 48,000 × 4/12 = 16,000 (أكتوبر-ديسمبر
+                      تخص 2025)</td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">486</td>
+                    <td>أعباء مثبتة مسبقًا</td>
+                    <td class="debit">16,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="acc-num">613</td>
+                    <td>إيجارات</td>
+                    <td></td>
+                    <td class="credit">16,000</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="hl amber">التسجيل الأصلي (01/09): حـ/613 مدين 48,000 ← حـ/512 دائن | في 31/12 نُلغي 4 أشهر تخص
+                2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end exam 3 -->
+
+    <!-- ============ EXAM 4: MEDIUM ============ -->
+    <div class="exam-page e4" id="exam-4">
+      <div class="exam-header">
+        <div class="exam-meta">
+          <div class="exam-num">4</div>
+          <div>
+            <h2>امتحان متوسط — إهتالك + زبائن مشكوك فيهم</h2>
+            <div class="meta-info">
+              <div class="meta-chip">⏱ 60 دقيقة</div>
+              <div class="meta-chip">📋 3 أسئلة</div>
+              <div class="meta-chip" style="color:#fcd34d">🟡 مستوى متوسط</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">1</div>
+          <div class="q-text">
+            الإهتالك الخطي — مع خسارة قيمة واسترجاع
+            <span class="q-sub">8 نقاط</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>البيانات</h4>
+            <ul>
+              <li>تهيئات بـ 360,000 دج اشتريت في 01/01/2021 عمرها 5 سنوات</li>
+              <li>نهاية 2022: خسارة قيمة بـ 40,000 دج</li>
+              <li>نهاية 2023: قيمة الاسترجاع = 120,000 دج</li>
+              <li>المطلوب: جدول الإهتالك + القيود لكل السنوات حتى 2025</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل</div>
+            <div class="solution-content">
+              <p>VA = 360,000 | T = 20% | A = 72,000/سنة</p>
+              <table style="width:100%;border-collapse:collapse;font-size:13px;color:var(--text2);">
+                <tr style="background:var(--surface3);color:#67e8f9;">
+                  <th style="padding:8px;border:1px solid var(--border)">السنة</th>
+                  <th style="padding:8px;border:1px solid var(--border)">VA</th>
+                  <th style="padding:8px;border:1px solid var(--border)">A</th>
+                  <th style="padding:8px;border:1px solid var(--border)">ΣA</th>
+                  <th style="padding:8px;border:1px solid var(--border)">VCN</th>
+                  <th style="padding:8px;border:1px solid var(--border)">خسارة</th>
+                </tr>
+                <tr>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">2021</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">360,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">72,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">72,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">288,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">—</td>
+                </tr>
+                <tr>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">2022</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">360,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">72,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">144,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">216,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center;color:#fca5a5">−40,000</td>
+                </tr>
+                <tr style="background:rgba(34,211,238,0.04)">
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">2023</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">176,000</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">58,667</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">—</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">117,333</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center;color:#6ee7b7">+40,000</td>
+                </tr>
+                <tr>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">2024</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">157,333</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">78,667</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">—</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">78,667</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">—</td>
+                </tr>
+                <tr>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">2025</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">157,333</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">78,667</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">—</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">0</td>
+                  <td style="padding:7px;border:1px solid var(--border);text-align:center">—</td>
+                </tr>
+              </table>
+              <div class="hl amber">
+                VCN نهاية 2022 بعد الخسارة = 216,000 − 40,000 = 176,000<br>
+                قسط جديد 2023 = 176,000 ÷ 3 = 58,667<br>
+                VCN نهاية 2023 = 176,000 − 58,667 = 117,333<br>
+                استرجاع: قيمة الاسترجاع 120,000 > VCN في الحالة العادية (157,333) → مقيّد بـ 40,000 فقط<br>
+                قسط بعد الاسترجاع = (117,333 + 40,000) ÷ 2 = 78,667
+              </div>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>31/12/22</td>
+                    <td class="acc-num">681</td>
+                    <td>مخصصات الإهتالكات</td>
+                    <td class="debit">72,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">281x</td>
+                    <td>إهتالك التهيئات</td>
+                    <td></td>
+                    <td class="credit">72,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">681</td>
+                    <td>مخصصات خسائر القيمة</td>
+                    <td class="debit">40,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">291x</td>
+                    <td>خسائر القيمة — التهيئات</td>
+                    <td></td>
+                    <td class="credit">40,000</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/23</td>
+                    <td class="acc-num">681</td>
+                    <td>مخصصات الإهتالكات</td>
+                    <td class="debit">58,667</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">281x</td>
+                    <td>إهتالك التهيئات</td>
+                    <td></td>
+                    <td class="credit">58,667</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">291x</td>
+                    <td>خسائر القيمة</td>
+                    <td class="debit">40,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">781</td>
+                    <td>استرجاع خسائر القيمة — غير جارية</td>
+                    <td></td>
+                    <td class="credit">40,000</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/24</td>
+                    <td class="acc-num">681</td>
+                    <td>مخصصات الإهتالكات</td>
+                    <td class="debit">78,667</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">281x</td>
+                    <td>إهتالك التهيئات</td>
+                    <td></td>
+                    <td class="credit">78,667</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">2</div>
+          <div class="q-text">
+            الزبائن المشكوك فيهم — دورتان
+            <span class="q-sub">8 نقاط | TVA 19%</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>البيانات</h4>
+            <ul>
+              <li>نهاية 2023: زبون A — دين TTC = 119,000 | خسارة قيمة 30%</li>
+              <li>خلال 2024: الزبون A سدّد 47,600 دج | الباقي يُحتمل عدم تسديد 60%</li>
+              <li>نهاية 2024: زبون B (عادي) — دين TTC = 95,200 | يُحتمل عدم تسديد 40%</li>
+              <li>نهاية 2025: الزبون A أعلن إفلاسه — لم يسدد شيئًا من الباقي | الزبون B تحسّنت وضعيته 70%</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل</div>
+            <div class="solution-content">
+              <p><strong>نهاية 2023:</strong></p>
+              <p>HT = 119,000 ÷ 1.19 = 100,000 | خسارة = 100,000 × 30% = 30,000</p>
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>31/12/23</td>
+                    <td class="acc-num">416</td>
+                    <td>الزبائن المشكوك فيهم — A</td>
+                    <td class="debit">119,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td></td>
+                    <td class="credit">119,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">685</td>
+                    <td>مخصصات خسائر القيمة</td>
+                    <td class="debit">30,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">491A</td>
+                    <td>خسائر القيمة — الزبون A</td>
+                    <td></td>
+                    <td class="credit">30,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">نهاية 2024 — الزبون A: رصيد = 119,000 − 47,600 = 71,400 | HT =
+                      60,000 | خسارة = 60,000 × 60% = 36,000 | تعديل = 36,000 − 30,000 = +6,000</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/24</td>
+                    <td class="acc-num">685</td>
+                    <td>مخصصات خسائر القيمة (رفع)</td>
+                    <td class="debit">6,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">491A</td>
+                    <td>خسائر القيمة — الزبون A</td>
+                    <td></td>
+                    <td class="credit">6,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">نهاية 2024 — الزبون B: HT = 95,200 ÷ 1.19 = 80,000 | خسارة =
+                      80,000 × 40% = 32,000</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/24</td>
+                    <td class="acc-num">416</td>
+                    <td>الزبائن المشكوك فيهم — B</td>
+                    <td class="debit">95,200</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">411</td>
+                    <td>الزبائن</td>
+                    <td></td>
+                    <td class="credit">95,200</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">685</td>
+                    <td>مخصصات خسائر القيمة</td>
+                    <td class="debit">32,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">491B</td>
+                    <td>خسائر القيمة — الزبون B</td>
+                    <td></td>
+                    <td class="credit">32,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">نهاية 2025 — إفلاس الزبون A (لم يسدد الباقي 71,400)</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/25</td>
+                    <td class="acc-num">654</td>
+                    <td>خسائر عن ديون غير قابلة للتحصيل (60,000 − 36,000 = 24,000 إضافي)</td>
+                    <td class="debit">24,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">491A</td>
+                    <td>خسائر القيمة — A (36,000)</td>
+                    <td class="debit">36,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة (11,400)</td>
+                    <td class="debit">11,400</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">416</td>
+                    <td>الزبائن المشكوك فيهم — A</td>
+                    <td></td>
+                    <td class="credit">71,400</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">نهاية 2025 — تحسن الزبون B بـ 70%: تخفيض المؤونة = 32,000 × 70%
+                      = 22,400</td>
+                  </tr>
+                  <tr>
+                    <td>31/12/25</td>
+                    <td class="acc-num">491B</td>
+                    <td>خسائر القيمة — B</td>
+                    <td class="debit">22,400</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">785</td>
+                    <td>استرجاع خسائر القيمة — أصول جارية</td>
+                    <td></td>
+                    <td class="credit">22,400</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-header" onclick="toggleQ(this)">
+          <div class="q-num">3</div>
+          <div class="q-text">
+            مردودات + أغلفة — جرد دائم
+            <span class="q-sub">6 نقاط | TVA 19%</span>
+          </div>
+          <div class="expand-btn">▼</div>
+        </div>
+        <div class="question-body">
+          <div class="data-box">
+            <h4>العمليات</h4>
+            <ul>
+              <li>01/04: شراء بضاعة بـ 60,000 دج HT على الحساب | TVA 19%</li>
+              <li>01/08: استلام البضاعة المشتراة في 01/04</li>
+              <li>01/12: إرجاع بضاعة للمورد بـ 8,000 دج HT (بها عطب)</li>
+              <li>02/01: بيع بضاعة بـ 90,000 دج HT نقدًا مع أغلفة متداولة بـ 2,000 دج، تكلفتها 55,000 دج | TVA 19%</li>
+              <li>02/15: الزبون أرجع 50% من الأغلفة سليمة والباقي لم يُرجعه</li>
+            </ul>
+          </div>
+          <button class="solution-toggle" onclick="toggleSol(this)">🔍 إظهار الحل</button>
+          <div class="solution-box">
+            <div class="solution-header">✅ الحل</div>
+            <div class="solution-content">
+              <div class="journal-wrap">
+                <table class="journal-table">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>ح</th>
+                    <th>الحساب</th>
+                    <th>مدين</th>
+                    <th>دائن</th>
+                  </tr>
+                  <tr>
+                    <td>01/04</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td class="debit">60,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">44566</td>
+                    <td>TVA مسترجعة</td>
+                    <td class="debit">11,400</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td></td>
+                    <td class="credit">71,400</td>
+                  </tr>
+                  <tr>
+                    <td>01/08</td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td class="debit">60,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td></td>
+                    <td class="credit">60,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">01/12 — مردودات مشتريات (8,000 × 1.19 = 9,520)</td>
+                  </tr>
+                  <tr>
+                    <td>01/12</td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td class="debit">8,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">8,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">401</td>
+                    <td>مورد السلع والخدمات</td>
+                    <td class="debit">9,520</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">380</td>
+                    <td>مشتريات بضاعة</td>
+                    <td></td>
+                    <td class="credit">8,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">44566</td>
+                    <td>TVA مسترجعة</td>
+                    <td></td>
+                    <td class="credit">1,520</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">02/01 — بيع مع أغلفة (90,000 × 1.19 = 107,100)</td>
+                  </tr>
+                  <tr>
+                    <td>02/01</td>
+                    <td class="acc-num">53</td>
+                    <td>الصندوق</td>
+                    <td class="debit">109,100</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">700</td>
+                    <td>مبيعات البضاعة</td>
+                    <td></td>
+                    <td class="credit">90,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4196</td>
+                    <td>أمانات مستلمة</td>
+                    <td></td>
+                    <td class="credit">2,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">4457</td>
+                    <td>TVA محصلة</td>
+                    <td></td>
+                    <td class="credit">17,100</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">600</td>
+                    <td>مشتريات بضاعة مباعة</td>
+                    <td class="debit">55,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">30</td>
+                    <td>مخزون بضاعة</td>
+                    <td></td>
+                    <td class="credit">55,000</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="section-row">02/15 — إرجاع 50% سليمة (1,000) + 50% غير مرجعة تصبح تثبيتًا
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>02/15</td>
+                    <td class="acc-num">4196</td>
+                    <td>أمانات مستلمة</td>
+                    <td class="debit">2,000</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">53</td>
+                    <td>الصندوق (إرجاع 50%)</td>
+                    <td></td>
+                    <td class="credit">1,000</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="acc-num">708</td>
+                    <td>نواتج الأنشطة الملحقة (الباقي لم يُرجع)</td>
+                    <td></td>
+                    <td class="credit">1,000</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="hl green">الـ 50% غير المرجعة من الأغلفة: يعامَل كتنازل — ترصيد حساب الأمانات كافٍ هنا لأن
+                المبلغ يسير للنواتج</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end exam 4 -->
+
+  </div><!-- end main -->
+
+  <script>
+    function showExam(n) {
+      document.querySelectorAll('.exam-page').forEach((p, i) => p.classList.toggle('active', i === n - 1));
+      document.querySelectorAll('.exam-tab').forEach(t => t.classList.toggle('active', +t.dataset.exam === n));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function toggleQ(header) {
+      const body = header.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      header.classList.toggle('open', !isOpen);
+    }
+    function toggleSol(btn) {
+      const box = btn.nextElementSibling;
+      const isShown = box.classList.contains('shown');
+      box.classList.toggle('shown', !isShown);
+      btn.classList.toggle('shown', !isShown);
+      btn.textContent = isShown ? '🔍 إظهار الحل الكامل' : '🙈 إخفاء الحل';
+    }
+  </script>
+</body>
+
+</html>

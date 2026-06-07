@@ -1,0 +1,3334 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دروس المحاسبة المالية 2 – </title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface2: #1a2236;
+      --surface3: #1e2d45;
+      --accent: #3b82f6;
+      --accent2: #10b981;
+      --accent3: #f59e0b;
+      --accent4: #ec4899;
+      --accent5: #8b5cf6;
+      --text: #f1f5f9;
+      --text2: #94a3b8;
+      --text3: #64748b;
+      --border: rgba(255, 255, 255, 0.07);
+      --gold: #f59e0b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0a0e1a 0%, #0f1f3d 50%, #0a0e1a 100%);
+      padding: 60px 20px 50px;
+      text-align: center;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 0%, #93c5fd 50%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      color: var(--text2);
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.8;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 24px;
+      text-align: center;
+    }
+
+    .stat-item .num {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-item .lbl {
+      font-size: 12px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
+    /* NAV */
+    .nav-bar {
+      background: rgba(17, 24, 39, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scrollbar-width: none;
+    }
+
+    .nav-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 1px solid transparent;
+      color: var(--text2);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-size: 13px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .nav-btn.active {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+      color: #93c5fd;
+    }
+
+    /* MAIN */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* LESSON SECTIONS */
+    .lesson-section {
+      margin-bottom: 60px;
+      display: none;
+    }
+
+    .lesson-section.active {
+      display: block;
+    }
+
+    .lesson-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lesson-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .l1 .lesson-num {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .l2 .lesson-num {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    .l3 .lesson-num {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+    }
+
+    .l4 .lesson-num {
+      background: rgba(236, 72, 153, 0.2);
+      color: #f472b6;
+    }
+
+    .l5 .lesson-num {
+      background: rgba(139, 92, 246, 0.2);
+      color: #a78bfa;
+    }
+
+    .l6 .lesson-num {
+      background: rgba(20, 184, 166, 0.2);
+      color: #2dd4bf;
+    }
+
+    .l7 .lesson-num {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+
+    .lesson-title-wrap h2 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .lesson-title-wrap p {
+      font-size: 13px;
+      color: var(--text2);
+      margin-top: 4px;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      background: rgba(59, 130, 246, 0.15);
+    }
+
+    .card p,
+    .card li {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.9;
+      margin-bottom: 8px;
+    }
+
+    .card ul {
+      padding-right: 20px;
+    }
+
+    .card li {
+      list-style: disc;
+    }
+
+    /* HIGHLIGHT BOXES */
+    .highlight {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      border-right: 3px solid;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .highlight.blue {
+      background: rgba(59, 130, 246, 0.08);
+      border-color: #3b82f6;
+      color: #93c5fd;
+    }
+
+    .highlight.green {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: #10b981;
+      color: #6ee7b7;
+    }
+
+    .highlight.amber {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: #f59e0b;
+      color: #fcd34d;
+    }
+
+    .highlight.red {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+
+    .highlight.purple {
+      background: rgba(139, 92, 246, 0.08);
+      border-color: #8b5cf6;
+      color: #c4b5fd;
+    }
+
+    /* JOURNAL TABLE */
+    .journal-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .journal-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 550px;
+    }
+
+    .journal-table th {
+      background: var(--surface2);
+      color: var(--text2);
+      padding: 10px 14px;
+      text-align: right;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .journal-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--surface);
+      vertical-align: top;
+    }
+
+    .journal-table tr:hover td {
+      background: var(--surface2);
+    }
+
+    .journal-table .acc-num {
+      color: var(--accent);
+      font-weight: 700;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .journal-table .debit {
+      color: #34d399;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .journal-table .credit {
+      color: #f87171;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .journal-table .desc {
+      color: var(--text2);
+      font-size: 13px;
+    }
+
+    .journal-table .sub-entry td {
+      padding-right: 30px;
+    }
+
+    .journal-table .to-sign {
+      color: var(--text3);
+      font-size: 12px;
+    }
+
+    .journal-table .header-row td {
+      background: var(--surface2);
+      color: var(--text3);
+      font-size: 12px;
+      text-align: center;
+      padding: 6px;
+      font-style: italic;
+    }
+
+    /* FORMULA BOX */
+    .formula-box {
+      background: var(--surface2);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 14px 0;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fbbf24;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+
+    /* STEPS */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+    }
+
+    .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content strong {
+      color: var(--text);
+      font-size: 14px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .step-content span {
+      color: var(--text2);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* TWO COL */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 14px 0;
+    }
+
+    @media(max-width:700px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* EXAMPLE BOX */
+    .example-header {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 12px 12px 0 0;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .example-body {
+      background: var(--surface);
+      border: 1px solid rgba(245, 158, 11, 0.15);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .example-body p {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    /* INVOICE BOX */
+    .invoice-box {
+      background: var(--surface2);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .invoice-box .inv-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 15px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .invoice-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      color: var(--text2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .invoice-row.total {
+      font-weight: 700;
+      color: var(--accent2);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 4px;
+      padding-top: 8px;
+    }
+
+    .invoice-row.minus {
+      color: #f87171;
+    }
+
+    /* BADGE TAGS */
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      margin: 2px;
+    }
+
+    .tag.blue {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .tag.green {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    .tag.amber {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+    }
+
+    .tag.red {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+
+    .tag.purple {
+      background: rgba(139, 92, 246, 0.2);
+      color: #a78bfa;
+    }
+
+    /* COMPARISON TABLE */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 14px 0;
+    }
+
+    .compare-table th {
+      background: var(--surface2);
+      padding: 10px 14px;
+      text-align: center;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .compare-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      text-align: center;
+      color: var(--text2);
+      font-size: 13px;
+    }
+
+    .compare-table tr:hover td {
+      background: var(--surface2);
+    }
+
+    /* ACCOUNT TREE */
+    .acc-tree {
+      margin: 12px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .acc-tree li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin: 4px 0;
+      background: var(--surface2);
+      font-size: 14px;
+      color: var(--text2);
+      transition: background 0.2s;
+    }
+
+    .acc-tree li:hover {
+      background: var(--surface3);
+      color: var(--text);
+    }
+
+    .acc-tree .acc-code {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 13px;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    /* SUMMARY BOX */
+    .summary-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .summary-box h4 {
+      color: #34d399;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .summary-box ul {
+      padding-right: 20px;
+    }
+
+    .summary-box li {
+      color: var(--text2);
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 4px;
+      list-style: disc;
+    }
+
+    /* DEPRECIATION TABLE */
+    .dep-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 14px 0;
+      overflow-x: auto;
+      display: block;
+    }
+
+    .dep-table th {
+      background: var(--surface3);
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      color: #93c5fd;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .dep-table td {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      color: var(--text2);
+      text-align: center;
+    }
+
+    .dep-table tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .dep-table tr:hover td {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .dep-table .highlight-row td {
+      background: rgba(59, 130, 246, 0.1);
+      color: #93c5fd;
+    }
+
+    #btn {
+      background-color: #90c2ff;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 15px;
+      color: #000000;
+      font-weight: 600;
+      transition: ease-in-out 0.3s;
+    }
+
+    #btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+    <div class="hero-badge">📚المحاسبة المالية 2ن</div>
+    <h1>دروس المحاسبة المالية الشاملة</h1>
+    <p>كل الدروس مشروحة بعمق وبأمثلة كاملة — من الصفر حتى الامتحان. اضغط على الدرس الذي تريد.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="num">11</div>
+        <div class="lbl">درسًا كاملاً</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">+40</div>
+        <div class="lbl">قيد محاسبي</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">+15</div>
+        <div class="lbl">مثال محلول</div>
+      </div>
+      <div class="stat-item">
+        <div class="lbl">الامتحانات التدريبية</div>
+        <a href="exmas.html"><button id="btn">📝 الامتحانات</button></a>
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <button class="nav-btn active" onclick="showLesson(0)">📦 مردودات المشتريات</button>
+      <button class="nav-btn" onclick="showLesson(1)">🏦 التسبيقات</button>
+      <button class="nav-btn" onclick="showLesson(2)">💰 التخفيضات</button>
+      <button class="nav-btn" onclick="showLesson(3)">📦 الأغلفة</button>
+      <button class="nav-btn" onclick="showLesson(4)">🏗️ الإنتاج الجاري</button>
+      <button class="nav-btn" onclick="showLesson(5)">📉 الإهتالك</button>
+      <button class="nav-btn" onclick="showLesson(6)">📊 نهاية الدورة</button>
+      <button class="nav-btn" onclick="showLesson(7)">🗒️ الأوراق التجارية</button>
+      <button class="nav-btn" onclick="showLesson(8)">🔢 الجرد المتناوب</button>
+      <button class="nav-btn" onclick="showLesson(9)">👥 الزبائن المشكوك فيهم</button>
+      <button class="nav-btn" onclick="showLesson(10)">📋 دراسة حالة متكاملة</button>
+    </div>
+  </nav>
+
+  <div class="main">
+
+    <!-- ======== LESSON 1: MARDOUDAAT ======== -->
+    <div class="lesson-section l1 active" id="lesson-0">
+      <div class="lesson-header">
+        <div class="lesson-num">1</div>
+        <div class="lesson-title-wrap">
+          <h2>مردودات المشتريات والمبيعات</h2>
+          <p>إرجاع البضاعة للمورد أو استلامها من الزبون</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">💡</div>ما هي المردودات؟
+        </div>
+        <p>المردودات هي <strong style="color:#60a5fa">إرجاع بضاعة</strong> تم شراؤها أو بيعها بسبب خلل في الجودة أو عدم
+          مطابقة المواصفات أو تلف أثناء النقل. المبدأ المحاسبي بسيط: <strong style="color:#34d399">تسجّل مردودات
+            المشتريات عكس قيد الشراء تمامًا</strong>، وتسجّل مردودات المبيعات عكس قيد البيع.</p>
+        <div class="highlight amber">⚠️ قاعدة ذهبية: كل قيد مردود = عكس القيد الأصلي</div>
+      </div>
+
+      <h3 style="color:#60a5fa;margin:24px 0 16px;font-size:18px;">أولاً: مردودات المشتريات — طريقة الجرد الدائم</h3>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📋</div>المراحل الثلاث لتسجيل مردودات المشتريات
+        </div>
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>تسجيل فاتورة المردودات</strong>
+              <span>عكس فاتورة الشراء: المورد مدين، المشتريات المخزنة دائنة، TVA مسترجعة دائنة</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>إخراج المردودات من المخازن</strong>
+              <span>المشتريات مدينة، والبضاعة الموجودة في المخزن دائنة — عكس عملية استلام البضاعة</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>استرجاع الثمن من المورد</strong>
+              <span>البنك/الصندوق مدين، المورد دائن — وهذه المرحلة نادرة لأن المورد يقتطعها من الديون</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight blue">📌 ملاحظة: في الغالب تقتصر على المرحلة الأولى فقط — لأن البضاعة تُرجع قبل دخولها
+          المخازن، والثمن يُقاص من ديون المورد.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🏦</div>القيود المحاسبية — المرحلة الأولى (فاتورة المردودات)
+        </div>
+        <div class="invoice-box">
+          <div class="inv-title">فاتورة مردودات المشتريات</div>
+          <div class="invoice-row"><span>ثمن الشراء خارج الرسم HT</span><span>X دج</span></div>
+          <div class="invoice-row"><span>الرسم على القيمة المضافة TVA %t</span><span>tX دج</span></div>
+          <div class="invoice-row total"><span>المجموع متضمن الرسم TTC</span><span>X + tX = Z دج</span></div>
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">401</td>
+              <td>مورد السلع والخدمات</td>
+              <td class="debit">Z</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">38</td>
+              <td>المشتريات المخزنة (380 بضاعة، 381 مواد، 382 أخرى)</td>
+              <td></td>
+              <td class="credit">X</td>
+            </tr>
+            <tr>
+              <td class="acc-num">44566</td>
+              <td>TVA مسترجعة على السلع والخدمات</td>
+              <td></td>
+              <td class="credit">tX</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">فاتورة مردودات مشتريات بضاعة</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🏭</div>المرحلة الثانية — إخراج المردودات من المخازن
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">380</td>
+              <td>مشتريات البضاعة</td>
+              <td class="debit">X₀</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">30</td>
+              <td>البضاعة (المخزن)</td>
+              <td></td>
+              <td class="credit">X₀</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">سند خروج مردودات مشتريات البضاعة من المخازن</td>
+            </tr>
+          </table>
+        </div>
+        <div class="highlight blue">💡 نفس القيد لكن: حـ/381 مواد أولية ↔ حـ/31 | حـ/382 تموينات أخرى ↔ حـ/32</div>
+      </div>
+
+      <div class="example-header">📝 مثال كامل محلول — مردودات المشتريات</div>
+      <div class="example-body">
+        <p><strong style="color:#fbbf24">شركة شفاء خلال 2022:</strong></p>
+        <p>1. شراء بضاعة بـ 30,000 دج خارج الرسم بصك بنكي (TVA 19%)</p>
+        <p>2. إرجاع بضاعة للمورد قيمتها 3,000 دج</p>
+        <p><strong style="color:#34d399">الحل:</strong></p>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">عملية 1: شراء البضاعة بصك</td>
+            </tr>
+            <tr>
+              <td class="acc-num">380</td>
+              <td>مشتريات البضائع المخزنة</td>
+              <td class="debit">30,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">4456</td>
+              <td>TVA قابل للاسترجاع</td>
+              <td class="debit">5,700</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">512</td>
+              <td>بنوك وحسابات جارية</td>
+              <td></td>
+              <td class="credit">35,700</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">عملية استلام البضاعة من المورد (جرد دائم)</td>
+            </tr>
+            <tr>
+              <td class="acc-num">30</td>
+              <td>مخزونات البضائع</td>
+              <td class="debit">30,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">380</td>
+              <td>مشتريات البضاعة المخزنة</td>
+              <td></td>
+              <td class="credit">30,000</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">عملية 2: إرجاع البضاعة للمورد</td>
+            </tr>
+            <tr>
+              <td class="acc-num">380</td>
+              <td>مشتريات البضاعة المخزنة</td>
+              <td class="debit">3,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">30</td>
+              <td>مخزونات البضائع</td>
+              <td></td>
+              <td class="credit">3,000</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">فاتورة مردودات المشتريات (3000 + 19% = 3570)</td>
+            </tr>
+            <tr>
+              <td class="acc-num">401</td>
+              <td>مورد السلع والخدمات</td>
+              <td class="debit">3,570</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">380</td>
+              <td>مشتريات البضائع المخزنة</td>
+              <td></td>
+              <td class="credit">3,000</td>
+            </tr>
+            <tr>
+              <td class="acc-num">4456</td>
+              <td>TVA مسترجعة</td>
+              <td></td>
+              <td class="credit">570</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <h3 style="color:#34d399;margin:24px 0 16px;font-size:18px;">ثانيًا: مردودات المبيعات — طريقة الجرد الدائم</h3>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🔄</div>القيود المحاسبية لمردودات المبيعات
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">فاتورة مردودات المبيعات</td>
+            </tr>
+            <tr>
+              <td class="acc-num">70</td>
+              <td>المبيعات</td>
+              <td class="debit">X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">4457</td>
+              <td>TVA محصلة</td>
+              <td class="debit">tX</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">411</td>
+              <td>العملاء</td>
+              <td></td>
+              <td class="credit">Z</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">إدخال مردودات مبيعات البضاعة إلى المخازن</td>
+            </tr>
+            <tr>
+              <td class="acc-num">30</td>
+              <td>البضاعة</td>
+              <td class="debit">C</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">600</td>
+              <td>البضاعة المستهلكة</td>
+              <td></td>
+              <td class="credit">C</td>
+            </tr>
+          </table>
+        </div>
+        <div class="highlight green">C = تكلفة شراء البضاعة المردودة (ليس سعر البيع)</div>
+      </div>
+
+      <h3 style="color:#a78bfa;margin:24px 0 16px;font-size:18px;">ثالثًا: الجرد المتناوب — الفرق الجوهري</h3>
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">⚖️</div>مقارنة الجرد الدائم والمتناوب
+        </div>
+        <table class="compare-table">
+          <tr>
+            <th>العنصر</th>
+            <th>الجرد الدائم</th>
+            <th>الجرد المتناوب</th>
+          </tr>
+          <tr>
+            <td>تسجيل الفاتورة</td>
+            <td><span class="tag green">✓ نعم</span></td>
+            <td><span class="tag green">✓ نعم</span></td>
+          </tr>
+          <tr>
+            <td>إخراج/إدخال المخزون</td>
+            <td><span class="tag green">✓ نعم</span></td>
+            <td><span class="tag red">✗ لا</span></td>
+          </tr>
+          <tr>
+            <td>استرجاع الثمن</td>
+            <td><span class="tag green">✓ نعم</span></td>
+            <td><span class="tag green">✓ نعم</span></td>
+          </tr>
+          <tr>
+            <td>الحسابات المستعملة</td>
+            <td>30,31,32 + 38</td>
+            <td>38 فقط خلال الدورة</td>
+          </tr>
+        </table>
+        <div class="highlight blue">📌 في الجرد المتناوب: لا نلمس حسابات المخزون (30, 31, 32) خلال السنة — نكتفي
+          بالفاتورة فقط.</div>
+      </div>
+    </div>
+
+    <!-- ======== LESSON 2: TASBEQAT ======== -->
+    <div class="lesson-section l2" id="lesson-1">
+      <div class="lesson-header">
+        <div class="lesson-num">2</div>
+        <div class="lesson-title-wrap">
+          <h2>محاسبة التسبيقات على المخزونات</h2>
+          <p>دفع جزء من الثمن مقدمًا لضمان إتمام الصفقة</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">💡</div>ما هو التسبيق؟
+        </div>
+        <p>التسبيق هو مبلغ يدفعه <strong style="color:#60a5fa">الزبون مسبقًا للمورد</strong> لضمان إتمام عملية الشراء.
+          عند إعداد الفاتورة النهائية يُخصم من المبلغ الإجمالي.</p>
+        <div class="two-col">
+          <div class="highlight green">✅ التسبيقات <strong>غير خاضعة للTVA</strong> — لأنها دفعة مسبقة لا عملية بيع
+            فعلية</div>
+          <div class="highlight amber">⚠️ التسبيق لا يتم على الحساب — يُسدد <strong>نقدًا أو بصك</strong> فقط</div>
+        </div>
+      </div>
+
+      <h3 style="color:#34d399;margin:24px 0 16px;font-size:18px;">عند المشتري (الزبون) — حـ/4091</h3>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📥</div>المرحلة الأولى: دفع التسبيق
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">4091</td>
+              <td>الموردون: تسبيقات ومدفوعات مسددة مسبقًا</td>
+              <td class="debit">x</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">512</td>
+              <td>البنك</td>
+              <td></td>
+              <td class="credit">x</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">دفع تسبيق للمورد</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📄</div>المرحلة الثانية: استلام الفاتورة
+        </div>
+        <p style="color:var(--text2);font-size:14px;margin-bottom:14px;">عند استلام الفاتورة يُخصم التسبيق من المبلغ
+          الإجمالي:</p>
+        <div class="invoice-box">
+          <div class="inv-title">كيفية حساب الفاتورة مع التسبيق</div>
+          <div class="invoice-row"><span>ثمن الشراء خارج الرسم HT</span><span>X</span></div>
+          <div class="invoice-row"><span>TVA %t</span><span>tX</span></div>
+          <div class="invoice-row total"><span>المبلغ الإجمالي TTC</span><span>Z = X + tX</span></div>
+          <div class="invoice-row minus"><span>مبلغ التسبيق</span><span>- x</span></div>
+          <div class="invoice-row total"><span>المبلغ الصافي الواجب دفعه</span><span>Z - x</span></div>
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">380</td>
+              <td>المشتريات المخزنة (38)</td>
+              <td class="debit">X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">44566</td>
+              <td>TVA مسترجعة</td>
+              <td class="debit">tX</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">401</td>
+              <td>مورد السلع والخدمات</td>
+              <td></td>
+              <td class="credit">Z - x</td>
+            </tr>
+            <tr>
+              <td class="acc-num">4091</td>
+              <td>الموردون: تسبيقات مسددة مسبقًا</td>
+              <td></td>
+              <td class="credit">x</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">فاتورة الشراء — خصم التسبيق</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <h3 style="color:#60a5fa;margin:24px 0 16px;font-size:18px;">عند البائع (المورد) — حـ/4191</h3>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">💳</div>قيود التسبيق عند البائع
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">قبض التسبيق من الزبون</td>
+            </tr>
+            <tr>
+              <td class="acc-num">512</td>
+              <td>البنك</td>
+              <td class="debit">x</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">4191</td>
+              <td>العملاء: تسبيقات ومدفوعات مستلمة على الطلبيات</td>
+              <td></td>
+              <td class="credit">x</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">عند تحرير الفاتورة</td>
+            </tr>
+            <tr>
+              <td class="acc-num">411</td>
+              <td>الزبائن</td>
+              <td class="debit">Z - x</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">4191</td>
+              <td>تسبيقات مستلمة</td>
+              <td class="debit">x</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">700</td>
+              <td>مبيعات البضاعة</td>
+              <td></td>
+              <td class="credit">X</td>
+            </tr>
+            <tr>
+              <td class="acc-num">4457</td>
+              <td>TVA محصلة</td>
+              <td></td>
+              <td class="credit">tX</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="example-header">📝 مثال كامل محلول</div>
+      <div class="example-body">
+        <p><strong style="color:#fbbf24">العمليات:</strong></p>
+        <p>15/01: إرسال طلب شراء بضاعة مع تسبيق 100,000 دج بصك</p>
+        <p>15/04: وصول البضاعة — الفاتورة: HT = 300,000 دج | TVA 19%</p>
+        <p>15/06: تسديد الباقي بصك</p>
+        <div class="invoice-box">
+          <div class="inv-title">حساب الفاتورة</div>
+          <div class="invoice-row"><span>HT</span><span>300,000</span></div>
+          <div class="invoice-row"><span>TVA 19%</span><span>57,000</span></div>
+          <div class="invoice-row total"><span>TTC</span><span>357,000</span></div>
+          <div class="invoice-row minus"><span>التسبيق</span><span>- 100,000</span></div>
+          <div class="invoice-row total"><span>المبلغ الصافي</span><span>257,000</span></div>
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>التاريخ</th>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td>15/01</td>
+              <td class="acc-num">4091</td>
+              <td>تسبيقات مدفوعة مسبقًا</td>
+              <td class="debit">100,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">512</td>
+              <td>البنك</td>
+              <td></td>
+              <td class="credit">100,000</td>
+            </tr>
+            <tr>
+              <td>15/04</td>
+              <td class="acc-num">380</td>
+              <td>مشتريات البضاعة</td>
+              <td class="debit">300,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">44566</td>
+              <td>TVA مسترجعة</td>
+              <td class="debit">57,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">401</td>
+              <td>مورد السلع والخدمات</td>
+              <td></td>
+              <td class="credit">257,000</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">4091</td>
+              <td>تسبيقات مسددة مسبقًا</td>
+              <td></td>
+              <td class="credit">100,000</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">30</td>
+              <td>البضاعة</td>
+              <td class="debit">300,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">380</td>
+              <td>مشتريات البضاعة</td>
+              <td></td>
+              <td class="credit">300,000</td>
+            </tr>
+            <tr>
+              <td>15/06</td>
+              <td class="acc-num">401</td>
+              <td>مورد السلع والخدمات</td>
+              <td class="debit">257,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">512</td>
+              <td>البنك</td>
+              <td></td>
+              <td class="credit">257,000</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== LESSON 3: TAKHFIDHAT ======== -->
+    <div class="lesson-section l3" id="lesson-2">
+      <div class="lesson-header">
+        <div class="lesson-num">3</div>
+        <div class="lesson-title-wrap">
+          <h2>التخفيضات التجارية والمالية</h2>
+          <p>الحسومات والتنزيلات والمرتجعات وخصم التعجيل بالدفع</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🗂️</div>خريطة التخفيضات
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#fbbf24;font-weight:700;margin-bottom:10px;">التخفيضات التجارية (3 أنواع):</p>
+            <div class="highlight amber"><strong>الحسومات (Rabais):</strong> تعويض عن تأخر توريد أو عيب في السلعة</div>
+            <div class="highlight amber" style="margin-top:8px;"><strong>التنزيلات (Remise):</strong> لحجم الطلبية
+              الكبير أو لأهمية الزبون</div>
+            <div class="highlight amber" style="margin-top:8px;"><strong>المرتجعات (Ristourne):</strong> مكافأة في نهاية
+              السنة على الوفاء</div>
+          </div>
+          <div>
+            <p style="color:#60a5fa;font-weight:700;margin-bottom:10px;">التخفيض المالي (نوع واحد):</p>
+            <div class="highlight blue"><strong>خصم التعجيل بالدفع:</strong> للزبون الذي يسدد قبل الموعد المحدد — يُحسب
+              من السعر الأصلي</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color:#fbbf24;margin:24px 0 16px;font-size:18px;">القاعدة الأساسية: متى نسجّل؟</h3>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">⚖️</div>ضمن الفاتورة الأصلية أم في فاتورة مستقلة؟
+        </div>
+        <table class="compare-table">
+          <tr>
+            <th>الحالة</th>
+            <th>التسجيل المحاسبي</th>
+            <th>الحسابات</th>
+          </tr>
+          <tr>
+            <td>التخفيض التجاري ضمن الفاتورة الأصلية</td>
+            <td><span class="tag red">لا يُسجَّل</span></td>
+            <td>نسجّل فقط الصافي التجاري</td>
+          </tr>
+          <tr>
+            <td>التخفيض التجاري في فاتورة مستقلة</td>
+            <td><span class="tag green">يُسجَّل</span></td>
+            <td>حـ/609 (عند الزبون) | حـ/709 (عند المورد)</td>
+          </tr>
+          <tr>
+            <td>الخصم المالي ضمن الفاتورة الأصلية</td>
+            <td><span class="tag green">يُسجَّل</span></td>
+            <td>حـ/768 (عند الزبون) | حـ/668 (عند المورد)</td>
+          </tr>
+          <tr>
+            <td>الخصم المالي في فاتورة مستقلة</td>
+            <td><span class="tag green">يُسجَّل معكوس</span></td>
+            <td>حـ/668 (عند الزبون) | حـ/768 (عند المورد)</td>
+          </tr>
+        </table>
+        <div class="highlight red">⚠️ انتبه: الخصم المالي في فاتورة مستقلة = الحسابات معكوسة تمامًا! هذا مصدر الأخطاء
+          الشائعة.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🧮</div>كيفية حساب الفاتورة خطوة بخطوة
+        </div>
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>السعر الإجمالي خارج الرسم</strong>
+              <span>السعر الأصلي قبل أي خصم</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>طرح التخفيضات التجارية بالتوالي (ليس بالجمع!)</strong>
+              <span>التخفيض الثاني يُطبَّق على الصافي الأول — لا تجمع النسب</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>طرح الخصم المالي → الصافي المالي</strong>
+              <span>يُطبَّق على الصافي التجاري</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <strong>إضافة TVA على الصافي المالي</strong>
+              <span>الرسم على القيمة المضافة يُحسب على الصافي المالي</span>
+            </div>
+          </div>
+        </div>
+        <div class="formula-box">TTC = (السعر − ت.تجاري − خصم مالي) × (1 + %TVA)</div>
+      </div>
+
+      <div class="example-header">📝 مثال: تخفيض تجاري في الفاتورة الأصلية</div>
+      <div class="example-body">
+        <p>بيع بضاعة بـ 15,000 دج مع تنزيل 2%، TVA 19%، تكلفتها 10,000 دج</p>
+        <div class="invoice-box">
+          <div class="inv-title">الفاتورة</div>
+          <div class="invoice-row"><span>السعر HT</span><span>15,000</span></div>
+          <div class="invoice-row minus"><span>تخفيض 2%</span><span>- 300</span></div>
+          <div class="invoice-row total"><span>الصافي التجاري</span><span>14,700</span></div>
+          <div class="invoice-row"><span>TVA 19%</span><span>2,793</span></div>
+          <div class="invoice-row total"><span>TTC</span><span>17,493</span></div>
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>اسم الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">عند المورد — بيع على الحساب بالصافي التجاري</td>
+            </tr>
+            <tr>
+              <td class="acc-num">411</td>
+              <td>الزبائن</td>
+              <td class="debit">17,493</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">700</td>
+              <td>مبيعات البضاعة</td>
+              <td></td>
+              <td class="credit">14,700</td>
+            </tr>
+            <tr>
+              <td class="acc-num">4457</td>
+              <td>TVA محصلة</td>
+              <td></td>
+              <td class="credit">2,793</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">إخراج البضاعة</td>
+            </tr>
+            <tr>
+              <td class="acc-num">600</td>
+              <td>مشتريات بضاعة مباعة</td>
+              <td class="debit">10,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">30</td>
+              <td>مخزون بضاعة</td>
+              <td></td>
+              <td class="credit">10,000</td>
+            </tr>
+          </table>
+        </div>
+        <div class="highlight blue">📌 لم نسجّل التخفيض التجاري (300 دج) لأنه ضمن الفاتورة الأصلية</div>
+      </div>
+
+      <div class="example-header">📝 مثال: فاتورة إنقاص (تخفيض مستقل)</div>
+      <div class="example-body">
+        <p>في 22/03 أرسل المورد فاتورة إنقاص بـ 5% كتخفيض لوجود عيب في البضاعة (الصافي التجاري كان 14,700)</p>
+        <div class="invoice-box">
+          <div class="inv-title">فاتورة الإنقاص</div>
+          <div class="invoice-row"><span>5% × 14,700</span><span>735</span></div>
+          <div class="invoice-row"><span>TVA 19%</span><span>139.65</span></div>
+          <div class="invoice-row total"><span>TTC</span><span>874.65</span></div>
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>عند المورد</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">709</td>
+              <td>تخفيضات ممنوحة</td>
+              <td class="debit">735</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">4457</td>
+              <td>TVA محصلة</td>
+              <td class="debit">139.65</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">411</td>
+              <td>الزبائن</td>
+              <td></td>
+              <td class="credit">874.65</td>
+            </tr>
+            <tr>
+              <th>ح</th>
+              <th>عند الزبون</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">401</td>
+              <td>مورد السلع والخدمات</td>
+              <td class="debit">874.65</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">609</td>
+              <td>تخفيضات متحصل عليها</td>
+              <td></td>
+              <td class="credit">735</td>
+            </tr>
+            <tr>
+              <td class="acc-num">4456</td>
+              <td>TVA قابل للاسترجاع</td>
+              <td></td>
+              <td class="credit">139.65</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="example-header">📝 مثال: خصم مالي ضمن الفاتورة الأصلية</div>
+      <div class="example-body">
+        <p>بيع منتجات تامة: إجمالي 450,000 | تنزيل 2% | خصم مالي 1% | TVA 19% | تكلفة الإنتاج 400,000</p>
+        <div class="invoice-box">
+          <div class="inv-title">حساب الفاتورة</div>
+          <div class="invoice-row"><span>السعر</span><span>450,000</span></div>
+          <div class="invoice-row minus"><span>تنزيل 2%</span><span>- 9,000</span></div>
+          <div class="invoice-row total"><span>صافي تجاري</span><span>441,000</span></div>
+          <div class="invoice-row minus"><span>خصم مالي 1%</span><span>- 4,410</span></div>
+          <div class="invoice-row total"><span>صافي مالي</span><span>436,590</span></div>
+          <div class="invoice-row"><span>TVA 19%</span><span>82,952.1</span></div>
+          <div class="invoice-row total"><span>TTC</span><span>519,542.1</span></div>
+        </div>
+        <div class="highlight amber">⚠️ TVA تُحسب على الصافي المالي (436,590) لا على الصافي التجاري</div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>عند المورد</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">411</td>
+              <td>الزبائن</td>
+              <td class="debit">519,542.1</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">668</td>
+              <td>الأعباء المالية الأخرى (خصم مالي ممنوح)</td>
+              <td class="debit">4,410</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">701</td>
+              <td>مبيعات المنتجات تامة الصنع</td>
+              <td></td>
+              <td class="credit">441,000</td>
+            </tr>
+            <tr>
+              <td class="acc-num">4457</td>
+              <td>TVA محصلة</td>
+              <td></td>
+              <td class="credit">82,952.1</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== LESSON 4: AGHLIFA ======== -->
+    <div class="lesson-section l4" id="lesson-3">
+      <div class="lesson-header">
+        <div class="lesson-num">4</div>
+        <div class="lesson-title-wrap">
+          <h2>محاسبة الأغلفة</h2>
+          <p>أغلفة مستهلكة (تالفة) وأغلفة متداولة (قابلة للإرجاع)</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📦</div>نوعا الأغلفة
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#f472b6;font-weight:700;margin-bottom:8px;">الأغلفة المستهلكة (التغليفات)</p>
+            <div class="highlight red">
+              <ul style="padding-right:16px;">
+                <li>استخدام لمرة واحدة</li>
+                <li>مثل: علب بلاستيكية، ورق تغليف</li>
+                <li>ثمنها مضمن في سعر السلعة</li>
+                <li>حـ/326 تغليفات مخزنة</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <p style="color:#34d399;font-weight:700;margin-bottom:8px;">الأغلفة المتداولة</p>
+            <div class="highlight green">
+              <ul style="padding-right:16px;">
+                <li>قابلة للإرجاع (الضمان)</li>
+                <li>مثل: قارورات، صناديق خشبية</li>
+                <li>لها سعر الضمان منفصل</li>
+                <li>حـ/4096 أمانة مدفوعة (عند الزبون)</li>
+                <li>حـ/4196 أمانة مستلمة (عند المورد)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color:#f472b6;margin:24px 0 16px;font-size:18px;">محاسبة الأغلفة المستهلكة</h3>
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🔄</div>دورة الأغلفة المستهلكة
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>الحدث</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">3826</td>
+              <td>شراء تغليفات</td>
+              <td class="debit">X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">4456</td>
+              <td>TVA مسترجعة</td>
+              <td class="debit">tX</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">401/512</td>
+              <td>المورد أو البنك</td>
+              <td></td>
+              <td class="credit">Z</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">دخول الأغلفة إلى المخزن</td>
+            </tr>
+            <tr>
+              <td class="acc-num">326</td>
+              <td>تغليفات مخزنة</td>
+              <td class="debit">X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">3826</td>
+              <td>مشتريات تغليفات مخزنة</td>
+              <td></td>
+              <td class="credit">X</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">استخدامها (خروج للورشة)</td>
+            </tr>
+            <tr>
+              <td class="acc-num">6026</td>
+              <td>تغليفات مستهلكة</td>
+              <td class="debit">X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">326</td>
+              <td>تغليفات مخزنة</td>
+              <td></td>
+              <td class="credit">X</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <h3 style="color:#34d399;margin:24px 0 16px;font-size:18px;">محاسبة الأغلفة المتداولة — الحالات الممكنة</h3>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🔁</div>الحالات الأربع عند الزبون
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>الحالة</th>
+              <th>القيد المحاسبي</th>
+            </tr>
+            <tr>
+              <td>1. شراء مع أغلفة متداولة</td>
+              <td class="desc">حـ/38 مشتريات مدين + حـ/4096 أمانة مدفوعة مدين ← حـ/401 مورد دائن</td>
+            </tr>
+            <tr>
+              <td>2. إرجاع الأغلفة سليمة</td>
+              <td class="desc">حـ/401 مورد مدين ← حـ/4096 أمانة مدفوعة دائن</td>
+            </tr>
+            <tr>
+              <td>3. إرجاع الأغلفة معطوبة</td>
+              <td class="desc">حـ/401 مورد مدين + حـ/6136 نقص في التغليف مدين ← حـ/4096 أمانة مدفوعة دائن</td>
+            </tr>
+            <tr>
+              <td>4. عدم الإرجاع</td>
+              <td class="desc">حـ/2186 أغلفة متداولة مدين ← حـ/4096 أمانة مدفوعة دائن</td>
+            </tr>
+          </table>
+        </div>
+        <div class="highlight amber">⚠️ الحالة 4: إذا لم يُرجع الزبون الأغلفة فهي تصبح تثبيتًا ماديًا في حـ/2186</div>
+      </div>
+
+      <div class="example-header">📝 مثال كامل — دورة الأغلفة</div>
+      <div class="example-body">
+        <p>02/08: شراء بضاعة 50,000 دج بصك + أغلفة متداولة 10,000 دج | TVA 19%</p>
+        <p>02/14: بيع منتجات تامة 80,000 دج نقدًا + أغلفة 1,000 دج | TVA 19%</p>
+        <p>02/18: إرجاع 80% من الأغلفة للمورد نقدًا</p>
+        <p>03/20: الزبون أعاد الأغلفة مع عطب 200 دج، التسديد بصك</p>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>التاريخ</th>
+              <th>ح</th>
+              <th>الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td>02/08</td>
+              <td class="acc-num">380</td>
+              <td>مشتريات بضاعة</td>
+              <td class="debit">50,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">4096</td>
+              <td>أمانات مدفوعة</td>
+              <td class="debit">10,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">4456</td>
+              <td>TVA مسترجعة (50,000 × 19%)</td>
+              <td class="debit">9,500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">512</td>
+              <td>البنك</td>
+              <td></td>
+              <td class="credit">69,500</td>
+            </tr>
+            <tr>
+              <td>02/14</td>
+              <td class="acc-num">53</td>
+              <td>الصندوق</td>
+              <td class="debit">96,200</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">701</td>
+              <td>مبيعات المنتجات</td>
+              <td></td>
+              <td class="credit">80,000</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">4196</td>
+              <td>أمانات مستلمة</td>
+              <td></td>
+              <td class="credit">1,000</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">4457</td>
+              <td>TVA محصلة</td>
+              <td></td>
+              <td class="credit">15,200</td>
+            </tr>
+            <tr>
+              <td>02/18</td>
+              <td class="acc-num">53</td>
+              <td>الصندوق (80% × 10,000)</td>
+              <td class="debit">8,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">6136</td>
+              <td>نقص في مواد التغليف (20%)</td>
+              <td class="debit">2,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">4096</td>
+              <td>أمانات مدفوعة</td>
+              <td></td>
+              <td class="credit">10,000</td>
+            </tr>
+            <tr>
+              <td>03/20</td>
+              <td class="acc-num">4196</td>
+              <td>أمانات مستلمة</td>
+              <td class="debit">1,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">512</td>
+              <td>البنك (1,000 - 200)</td>
+              <td></td>
+              <td class="credit">800</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">708</td>
+              <td>نواتج الأنشطة الملحقة (مقابل العطب)</td>
+              <td></td>
+              <td class="credit">200</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== LESSON 5: INTAJ JARI ======== -->
+    <div class="lesson-section l5" id="lesson-4">
+      <div class="lesson-header">
+        <div class="lesson-num">5</div>
+        <div class="lesson-title-wrap">
+          <h2>الإنتاج الجاري من التثبيتات</h2>
+          <p>التثبيتات غير المكتملة في نهاية الدورة</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🏗️</div>ما هو الإنتاج الجاري؟
+        </div>
+        <p>أصول ثابتة تقوم المؤسسة ببنائها/إنتاجها ولم تكتمل بعد في نهاية السنة. تُقيّم بتكلفة الإنتاج.</p>
+        <ul class="acc-tree">
+          <li><span class="acc-code">232</span> التثبيتات المادية الجاري إنجازها</li>
+          <li><span class="acc-code">237</span> التثبيتات المعنوية الجاري إنجازها</li>
+          <li><span class="acc-code">238</span> تسبيقات وأقساط مدفوعة عن طلبية تثبيتات</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🔧</div>التثبيتات التي ينتجها الكيان لذاته
+        </div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>الحدث</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">تسجيل المصاريف أولًا (مواد، أجور، خدمات)</td>
+            </tr>
+            <tr>
+              <td class="acc-num">601</td>
+              <td>مواد أولية مستهلكة</td>
+              <td class="debit">X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">631</td>
+              <td>مصاريف العاملين</td>
+              <td class="debit">Y</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">31/421/53</td>
+              <td>مواد أولية / أجور مستحقة / الصندوق</td>
+              <td></td>
+              <td class="credit">X+Y</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">تثبيت التكاليف في الأصل الجاري إنجازه</td>
+            </tr>
+            <tr>
+              <td class="acc-num">232</td>
+              <td>التثبيتات المادية الجاري إنجازها</td>
+              <td class="debit">X+Y</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">732</td>
+              <td>إنتاج مثبت لأصول مادية</td>
+              <td></td>
+              <td class="credit">X+Y</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="header-row">عند اكتمال التثبيت</td>
+            </tr>
+            <tr>
+              <td class="acc-num">213xx</td>
+              <td>التثبيت المادي (مباني، معدات...)</td>
+              <td class="debit">الكلي</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">232</td>
+              <td>التثبيتات الجاري إنجازها</td>
+              <td></td>
+              <td class="credit">السابق</td>
+            </tr>
+            <tr>
+              <td class="acc-num">732</td>
+              <td>إنتاج مثبت لأصول مادية</td>
+              <td></td>
+              <td class="credit">الجديد</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="example-header">📝 مثال: بناء مباني إدارية</div>
+      <div class="example-body">
+        <p>31/12/2024: نسبة الإنجاز 60% | مواد أولية 800,000 | أجور 100,000 | مكتب الدراسات 50,000 نقدًا</p>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">601</td>
+              <td>مواد أولية مستهلكة</td>
+              <td class="debit">800,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">631</td>
+              <td>مصاريف العاملين</td>
+              <td class="debit">100,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">617</td>
+              <td>الدراسات والأبحاث</td>
+              <td class="debit">50,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">31</td>
+              <td>مواد أولية</td>
+              <td></td>
+              <td class="credit">800,000</td>
+            </tr>
+            <tr>
+              <td class="acc-num">421</td>
+              <td>أجور مستحقة</td>
+              <td></td>
+              <td class="credit">100,000</td>
+            </tr>
+            <tr>
+              <td class="acc-num">53</td>
+              <td>الصندوق</td>
+              <td></td>
+              <td class="credit">50,000</td>
+            </tr>
+            <tr>
+              <td class="acc-num">232</td>
+              <td>التثبيتات المادية الجاري إنجازها</td>
+              <td class="debit">950,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">732</td>
+              <td>إنتاج مثبت لأصول مادية</td>
+              <td></td>
+              <td class="credit">950,000</td>
+            </tr>
+          </table>
+        </div>
+        <p><strong style="color:#fbbf24">السنة التالية — اكتمال البناء:</strong></p>
+        <p>مواد إضافية 300,000 + أجور 80,000</p>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">601</td>
+              <td>مواد أولية مستهلكة</td>
+              <td class="debit">300,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">631</td>
+              <td>مصاريف العاملين</td>
+              <td class="debit">80,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">31</td>
+              <td>مواد أولية</td>
+              <td></td>
+              <td class="credit">300,000</td>
+            </tr>
+            <tr>
+              <td class="acc-num">421</td>
+              <td>أجور مستحقة</td>
+              <td></td>
+              <td class="credit">80,000</td>
+            </tr>
+            <tr>
+              <td class="acc-num">21315</td>
+              <td>مباني إدارية (950,000 + 380,000)</td>
+              <td class="debit">1,330,000</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">232</td>
+              <td>التثبيتات الجاري إنجازها</td>
+              <td></td>
+              <td class="credit">950,000</td>
+            </tr>
+            <tr>
+              <td class="acc-num">732</td>
+              <td>إنتاج مثبت لأصول مادية</td>
+              <td></td>
+              <td class="credit">380,000</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== LESSON 6: IHTILAK ======== -->
+    <div class="lesson-section l6" id="lesson-5">
+      <div class="lesson-header">
+        <div class="lesson-num">6</div>
+        <div class="lesson-title-wrap">
+          <h2>الإهتالك وخسائر القيمة</h2>
+          <p>توزيع تكلفة التثبيت على سنوات الاستخدام</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📉</div>مفهوم الإهتالك الخطي
+        </div>
+        <div class="two-col">
+          <div>
+            <div class="formula-box">T = (1/n) × 100</div>
+            <div class="formula-box">A = VA × T</div>
+          </div>
+          <div>
+            <div class="highlight blue">
+              <strong>VA</strong> = القيمة القابلة للإهتالك = VO − QR<br>
+              <strong>n</strong> = عدد سنوات الاستخدام<br>
+              <strong>T</strong> = معدل الإهتالك<br>
+              <strong>A</strong> = القسط السنوي
+            </div>
+          </div>
+        </div>
+        <div class="highlight amber">⚠️ إذا اقتُني التثبيت في منتصف السنة: قسط السنة الأولى يُحسب بالأشهر: A × (شهر/12)
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📋</div>جدول الإهتالك
+        </div>
+        <table class="dep-table">
+          <tr>
+            <th>السنة</th>
+            <th>VA</th>
+            <th>قسط الإهتالك A</th>
+            <th>الإهتالك المتراكم ΣA</th>
+            <th>القيمة المحاسبية الصافية VCN</th>
+          </tr>
+          <tr>
+            <td>2020</td>
+            <td>600,000</td>
+            <td>60,000 (6أشهر)</td>
+            <td>60,000</td>
+            <td>540,000</td>
+          </tr>
+          <tr>
+            <td>2021</td>
+            <td>600,000</td>
+            <td>120,000</td>
+            <td>180,000</td>
+            <td>420,000</td>
+          </tr>
+          <tr>
+            <td>2022</td>
+            <td>600,000</td>
+            <td>120,000</td>
+            <td>300,000</td>
+            <td>300,000</td>
+          </tr>
+          <tr>
+            <td>2023</td>
+            <td>600,000</td>
+            <td>120,000</td>
+            <td>420,000</td>
+            <td>180,000</td>
+          </tr>
+          <tr>
+            <td>2024</td>
+            <td>600,000</td>
+            <td>120,000</td>
+            <td>540,000</td>
+            <td>60,000</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>2025</td>
+            <td>600,000</td>
+            <td>60,000 (6أشهر)</td>
+            <td>600,000</td>
+            <td>0</td>
+          </tr>
+        </table>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>ح</th>
+              <th>الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td class="acc-num">681</td>
+              <td>مخصصات الإهتالكات والمؤونات — أصول غير جارية</td>
+              <td class="debit">A</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="acc-num">281x</td>
+              <td>إهتالك التثبيت المعني</td>
+              <td></td>
+              <td class="credit">A</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">⚡</div>خسائر القيمة عن التثبيتات
+        </div>
+        <p style="color:var(--text2);font-size:14px;margin-bottom:12px;">إذا كانت القيمة القابلة للتحصيل أقل من القيمة
+          المحاسبية الصافية → خسارة قيمة.</p>
+        <div class="formula-box">خسارة القيمة = القيمة القابلة للتحصيل − القيمة المحاسبية الصافية (VCN)</div>
+        <div class="journal-wrap">
+          <table class="journal-table">
+            <tr>
+              <th>الحالة</th>
+              <th>ح</th>
+              <th>الحساب</th>
+              <th>مدين</th>
+              <th>دائن</th>
+            </tr>
+            <tr>
+              <td>إثبات الخسارة</td>
+              <td class="acc-num">681</td>
+              <td>مخصصات الإهتالكات</td>
+              <td class="debit">X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">29x</td>
+              <td>خسائر القيمة عن التثبيتات</td>
+              <td></td>
+              <td class="credit">X</td>
+            </tr>
+            <tr>
+              <td>استرجاع/إلغاء</td>
+              <td class="acc-num">29x</td>
+              <td>خسائر القيمة عن التثبيتات</td>
+              <td class="debit">X</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="acc-num">781</td>
+              <td>استرجاع خسائر القيمة — أصول غير جارية</td>
+              <td></td>
+              <td class="credit">X</td>
+            </tr>
+          </table>
+        </div>
+        <div class="highlight red">⚠️ عند إثبات خسارة القيمة يتغير قسط الإهتالك للسنوات التالية:<br>قسط الجديد = (VCN −
+          خسارة القيمة) ÷ السنوات المتبقية</div>
+      </div>
+    </div>
+
+    <!-- ======== LESSON 7: NIHAYAT DAWRA ======== -->
+    <div class="lesson-section l7" id="lesson-6">
+      <div class="lesson-header">
+        <div class="lesson-num">7</div>
+        <div class="lesson-title-wrap">
+          <h2>أعمال نهاية الدورة المحاسبية</h2>
+          <p>تسوية المخزونات، الزبائن، الأعباء، والنواتج</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🔄</div>منهجية نهاية الدورة
+        </div>
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>ميزان المراجعة قبل الجرد</strong><span>التحقق من توازن المدين
+                والدائن</span></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>الجرد المادي والمحاسبي</strong><span>إحصاء الأصول والخصوم فعليًا ومقارنتها
+                بالسجلات</span></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>قيود التسوية</strong><span>الإهتالكات، خسائر القيمة، تسوية المخزون،
+                الزبائن، الأعباء/النواتج سلفًا</span></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <div class="step-content"><strong>ميزان المراجعة بعد الجرد</strong><span>القوائم المالية الختامية:
+                الميزانية، حساب النتائج</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color:#2dd4bf;margin:24px 0 16px;font-size:18px;">تسوية المخزونات — الجرد المتناوب</h3>
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📊</div>الخطوات الثلاث في نهاية السنة
+        </div>
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>إلغاء رصيد بداية المدة</strong><span>حـ/600 أو 601 أو 602 مدين ← حـ/30 أو
+                31 أو 32 دائن</span></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>إثبات الاستهلاك (ترصيد حـ/38)</strong><span>حـ/600-602 مدين ← حـ/380-382
+                دائن</span></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>إثبات رصيد نهاية المدة (الجرد الفعلي)</strong><span>حـ/30-32 مدين ←
+                حـ/600-602 دائن</span></div>
+          </div>
+        </div>
+        <div class="highlight blue">📌 للمنتجات: نفس الخطوات لكن نستعمل حـ/72 (الإنتاج المخزن) بدل حـ/600</div>
+      </div>
+
+      <h3 style="color:#2dd4bf;margin:24px 0 16px;font-size:18px;">تسوية حسابات الزبائن</h3>
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">👥</div>أنواع الزبائن وقيودها
+        </div>
+        <table class="compare-table">
+          <tr>
+            <th>نوع الزبون</th>
+            <th>التسجيل</th>
+            <th>الحسابات</th>
+          </tr>
+          <tr>
+            <td>زبون مشكوك فيه</td>
+            <td>تحويل من 411 → 416</td>
+            <td>حـ/416 مدين ← حـ/411 دائن</td>
+          </tr>
+          <tr>
+            <td>خسارة القيمة</td>
+            <td>تشكيل مؤونة</td>
+            <td>حـ/685 مدين ← حـ/49 دائن</td>
+          </tr>
+          <tr>
+            <td>استرجاع الخسارة</td>
+            <td>تحسن الوضعية</td>
+            <td>حـ/49 مدين ← حـ/785 دائن</td>
+          </tr>
+          <tr>
+            <td>دين معدوم</td>
+            <td>إفلاس الزبون</td>
+            <td>حـ/654 + حـ/4457 TVA مدين ← حـ/416 دائن</td>
+          </tr>
+        </table>
+        <div class="formula-box">خسارة القيمة = (الدين TTC ÷ 1.19) × النسبة%</div>
+        <div class="highlight amber">⚠️ خسارة القيمة تُحسب على الجزء خارج الرسم HT دائمًا</div>
+      </div>
+
+      <h3 style="color:#2dd4bf;margin:24px 0 16px;font-size:18px;">الأعباء والنواتج المثبتة مسبقًا</h3>
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📅</div>مبدأ استقلالية الدورات
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#f472b6;font-weight:700;margin-bottom:8px;">أعباء تخص الدورة القادمة (حـ/486)</p>
+            <div class="highlight red">
+              <strong>31/12/N:</strong><br>
+              حـ/486 مدين ← حـ/6xx دائن<br><br>
+              <strong>01/01/N+1 (عكس):</strong><br>
+              حـ/6xx مدين ← حـ/486 دائن
+            </div>
+          </div>
+          <div>
+            <p style="color:#34d399;font-weight:700;margin-bottom:8px;">نواتج تخص الدورة القادمة (حـ/487)</p>
+            <div class="highlight green">
+              <strong>31/12/N:</strong><br>
+              حـ/7xx مدين ← حـ/487 دائن<br><br>
+              <strong>01/01/N+1 (عكس):</strong><br>
+              حـ/487 مدين ← حـ/7xx دائن
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h4>✅ ملخص أهم الحسابات التي يجب حفظها</h4>
+        <ul>
+          <li>حـ/486 أعباء مثبتة مسبقًا — حـ/487 إيرادات مثبتة مسبقًا</li>
+          <li>حـ/416 زبائن مشكوك فيهم — حـ/491 خسائر القيمة عن الزبائن</li>
+          <li>حـ/654 خسائر عن ديون غير قابلة للتحصيل</li>
+          <li>حـ/685 مخصصات — أصول جارية | حـ/785 استرجاع — أصول جارية</li>
+          <li>حـ/681 مخصصات — أصول غير جارية | حـ/781 استرجاع — أصول غير جارية</li>
+          <li>حـ/28x إهتالك التثبيتات | حـ/29x خسائر القيمة — تثبيتات</li>
+          <li>حـ/39x خسائر القيمة — مخزونات | حـ/408 فواتير قيد الاستلام | حـ/418 فواتير قيد التحرير</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- =================== LESSON 8: الأوراق التجارية =================== -->
+    <div class="lesson-section l1" id="lesson-7">
+      <div class="lesson-header">
+        <div class="lesson-num">8</div>
+        <div class="lesson-title-wrap">
+          <h2>الأوراق التجارية (الكمبيالة والسند لأمر)</h2>
+          <p>الحسابات 413 — 403 — 5113 — 5114 والعمليات المتعلقة بها</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📄</div>تعريف الأوراق التجارية وأنواعها
+        </div>
+        <p style="color:var(--text2);line-height:1.8;margin-bottom:16px;">
+          الأوراق التجارية هي صكوك مكتوبة قابلة للتداول، تُستعمل كوسيلة للوفاء بالديون التجارية، وهي تعطي حاملها الحق في
+          تحصيل مبلغ محدد في تاريخ استحقاق معين.
+        </p>
+        <table class="compare-table">
+          <tr>
+            <th>النوع</th>
+            <th>التعريف</th>
+            <th>من يسحبها</th>
+          </tr>
+          <tr>
+            <td>الكمبيالة (السفتجة)</td>
+            <td>أمر يصدره الدائن (البائع) للمدين (المشتري) بدفع مبلغ في تاريخ محدد</td>
+            <td>البائع (الساحب) يسحبها على المشتري (المسحوب عليه)</td>
+          </tr>
+          <tr>
+            <td>السند لأمر</td>
+            <td>تعهد من المدين بدفع مبلغ للدائن في تاريخ محدد</td>
+            <td>المشتري (المدين) يحرره لصالح البائع</td>
+          </tr>
+        </table>
+        <div class="highlight blue">🔑 الكمبيالة الأكثر استعمالًا — نفس المعالجة المحاسبية للنوعين</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📝</div>الحسابات المستعملة
+        </div>
+        <table class="compare-table">
+          <tr>
+            <th>الحساب</th>
+            <th>التسمية</th>
+            <th>الجانب</th>
+            <th>عند من</th>
+          </tr>
+          <tr>
+            <td>413</td>
+            <td>الزبائن: أوراق للقبض</td>
+            <td>مدين</td>
+            <td>البائع (الساحب)</td>
+          </tr>
+          <tr>
+            <td>403</td>
+            <td>الموردون: أوراق للدفع</td>
+            <td>دائن</td>
+            <td>المشتري (المسحوب عليه)</td>
+          </tr>
+          <tr>
+            <td>5113</td>
+            <td>أوراق تجارية للتحصيل</td>
+            <td>مدين</td>
+            <td>البائع عند إرسالها للبنك</td>
+          </tr>
+          <tr>
+            <td>5114</td>
+            <td>أوراق تجارية للخصم</td>
+            <td>مدين</td>
+            <td>البائع عند خصمها في البنك</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3 style="color:#60a5fa;margin:24px 0 16px;font-size:18px;">العمليات المحاسبية المتعلقة بالأوراق التجارية</h3>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">1️⃣</div>سحب الكمبيالة وقبولها
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#34d399;font-weight:700;margin-bottom:8px;">عند البائع (الساحب)</p>
+            <div class="highlight green">
+              حـ/413 (أوراق للقبض) مدين<br>
+              ← حـ/411 (الزبائن) دائن<br>
+              <em>قبض كمبيالة من الزبون</em>
+            </div>
+          </div>
+          <div>
+            <p style="color:#f472b6;font-weight:700;margin-bottom:8px;">عند المشتري (المسحوب عليه)</p>
+            <div class="highlight red">
+              حـ/401 (الموردون) مدين<br>
+              ← حـ/403 (أوراق للدفع) دائن<br>
+              <em>قبول كمبيالة للمورد</em>
+            </div>
+          </div>
+        </div>
+        <div class="highlight blue">📌 يمكن سحب الورقة التجارية في نفس تاريخ الشراء أو البيع</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">2️⃣</div>التحصيل المباشر عند تاريخ الاستحقاق
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#34d399;font-weight:700;margin-bottom:8px;">عند البائع</p>
+            <div class="highlight green">
+              حـ/512 (البنك) مدين<br>
+              ← حـ/413 (أوراق للقبض) دائن<br>
+              <em>تحصيل الكمبيالة مباشرة</em>
+            </div>
+          </div>
+          <div>
+            <p style="color:#f472b6;font-weight:700;margin-bottom:8px;">عند المشتري</p>
+            <div class="highlight red">
+              حـ/403 (أوراق للدفع) مدين<br>
+              ← حـ/512 (البنك) دائن<br>
+              <em>دفع الكمبيالة للبائع</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">3️⃣</div>إرسال الكمبيالة للبنك للتحصيل
+        </div>
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-num">أ</div>
+            <div class="step-content">
+              <strong>عند الإرسال للبنك</strong>
+              <span>حـ/5113 (أوراق للتحصيل) مدين ← حـ/413 دائن</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">ب</div>
+            <div class="step-content">
+              <strong>عند وصول إشعار التحصيل من البنك</strong>
+              <span>حـ/512 مدين + حـ/627 (عمولة) مدين + حـ/4456 (TVA على العمولة) مدين ← حـ/5113 دائن</span>
+            </div>
+          </div>
+        </div>
+        <div class="formula-box">TVA على العمولة البنكية = العمولة HT × 19%</div>
+        <div class="highlight amber">⚠️ العمولة البنكية خاضعة لـ TVA 19% وتُسجل في حـ/627</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">4️⃣</div>خصم الكمبيالة (تحويلها لنقد قبل الاستحقاق)
+        </div>
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-num">أ</div>
+            <div class="step-content">
+              <strong>عند الإرسال للخصم</strong>
+              <span>حـ/5114 (أوراق للخصم) مدين ← حـ/413 دائن</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">ب</div>
+            <div class="step-content">
+              <strong>عند وصول إشعار الخصم من البنك</strong>
+              <span>حـ/512 مدين + حـ/627 (عمولة) مدين + حـ/661 (فوائد الخصم) مدين + حـ/4456 TVA مدين ← حـ/5114
+                دائن</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight red">⚠️ الفوائد (حـ/661) خاضعة لـ TVA أيضًا. المبلغ المحصل = قيمة الكمبيالة – العمولة –
+          الفوائد</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">5️⃣</div>تظهير الكمبيالة (التنازل عنها لتسوية دين)
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#fbbf24;font-weight:700;margin-bottom:8px;">عند المُظهِّر (من يتنازل)</p>
+            <div class="highlight amber">
+              حـ/401 (الموردون) مدين<br>
+              ← حـ/413 (أوراق للقبض) دائن<br>
+              <em>تظهير الكمبيالة لتسوية دين</em>
+            </div>
+          </div>
+          <div>
+            <p style="color:#2dd4bf;font-weight:700;margin-bottom:8px;">عند المُظهَّر له (من يستلم)</p>
+            <div class="highlight green">
+              حـ/413 مدين<br>
+              ← حـ/411 دائن<br>
+              <em>استلام كمبيالة بالتظهير</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">6️⃣</div>تجديد الكمبيالة (تمديد تاريخ الاستحقاق)
+        </div>
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>إلغاء الكمبيالة القديمة</strong><span>عند البائع: حـ/411 مدين ← حـ/413
+                دائن | عند المشتري: حـ/403 مدين ← حـ/401 دائن</span></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>إثبات مصاريف التجديد والتأخير</strong><span>عند البائع: حـ/413 مدين ←
+                حـ/411 مدين + حـ/763 (عوائد) دائن</span></div>
+          </div>
+        </div>
+        <div class="highlight blue">📌 مصاريف التجديد تُضاف لقيمة الكمبيالة الجديدة — عند المشتري: حـ/401 مدين + حـ/661
+          (أعباء) مدين ← حـ/403 دائن</div>
+      </div>
+
+      <div class="summary-box">
+        <h4>✅ ملخص الحسابات الرئيسية للأوراق التجارية</h4>
+        <ul>
+          <li>حـ/413 الزبائن: أوراق للقبض — (عند البائع بدل حـ/411)</li>
+          <li>حـ/403 الموردون: أوراق للدفع — (عند المشتري بدل حـ/401)</li>
+          <li>حـ/5113 أوراق للتحصيل — عند الإيداع في البنك للتحصيل</li>
+          <li>حـ/5114 أوراق للخصم — عند تقديمها للبنك للخصم المبكر</li>
+          <li>حـ/627 خدمات مصرفية — العمولة البنكية (TVA 19%)</li>
+          <li>حـ/661 أعباء الفوائد — فوائد الخصم (TVA 19%)</li>
+          <li>حـ/763 عوائد الحسابات الدائنة — فوائد التجديد عند البائع</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- =================== LESSON 9: الجرد المتناوب الكامل =================== -->
+    <div class="lesson-section l2" id="lesson-8">
+      <div class="lesson-header">
+        <div class="lesson-num">9</div>
+        <div class="lesson-title-wrap">
+          <h2>الجرد المتناوب — التسوية الكاملة في نهاية السنة</h2>
+          <p>إلغاء المخزون القديم + ترصيد حـ/38 + إثبات المخزون الجديد</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🔄</div>الفرق بين الجرد الدائم والمتناوب
+        </div>
+        <table class="compare-table">
+          <tr>
+            <th>المعيار</th>
+            <th>الجرد الدائم</th>
+            <th>الجرد المتناوب</th>
+          </tr>
+          <tr>
+            <td>تسجيل حركة المخزون خلال السنة</td>
+            <td>✅ نعم (دخول وخروج)</td>
+            <td>❌ لا — فقط الفواتير</td>
+          </tr>
+          <tr>
+            <td>حسابات المخزون خلال السنة</td>
+            <td>حـ/30، 31، 32، 35...</td>
+            <td>حـ/38 فقط</td>
+          </tr>
+          <tr>
+            <td>تسوية نهاية السنة</td>
+            <td>تسوية فوارق الجرد فقط</td>
+            <td>3 خطوات كاملة</td>
+          </tr>
+          <tr>
+            <td>التكلفة الإدارية</td>
+            <td>أعلى (تتبع مستمر)</td>
+            <td>أبسط وأقل تكلفة</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3 style="color:#34d399;margin:24px 0 16px;font-size:18px;">الخطوات الثلاث للجرد المتناوب في 31/12</h3>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">1️⃣</div>إلغاء مخزون بداية المدة (Si)
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#f472b6;font-weight:700;margin-bottom:8px;">بضاعة + مواد أولية + تموينات</p>
+            <div class="highlight red">
+              حـ/600 أو 601 أو 602 مدين<br>
+              ← حـ/30 أو 31 أو 32 دائن<br>
+              <em>إلغاء رصيد بداية المدة</em>
+            </div>
+          </div>
+          <div>
+            <p style="color:#34d399;font-weight:700;margin-bottom:8px;">منتجات (تامة، نصف مصنعة، جارية)</p>
+            <div class="highlight green">
+              حـ/72 (الإنتاج المخزن) مدين<br>
+              ← حـ/33، 35 دائن<br>
+              <em>إلغاء رصيد منتجات بداية المدة</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">2️⃣</div>إثبات الاستهلاك — ترصيد حـ/38
+        </div>
+        <div class="highlight blue" style="margin-bottom:14px;">
+          📌 حساب 38 (المشتريات المخزنة) يُجمع خلال السنة كل مشتريات المخزون. في نهاية السنة نُرصده بتحويله لحسابات
+          التكلفة.
+        </div>
+        <div class="highlight green">
+          <strong>القيد:</strong><br>
+          حـ/600 مشتريات بضاعة مباعة مدين<br>
+          حـ/601 مواد أولية مستهلكة مدين<br>
+          حـ/602 تموينات أخرى مستهلكة مدين<br>
+          ← حـ/380 مشتريات بضاعة مخزنة دائن<br>
+          ← حـ/381 مشتريات مواد أولية دائن<br>
+          ← حـ/382 مشتريات تموينات أخرى دائن<br>
+          <em>(ترصيد حـ/38)</em>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">3️⃣</div>إثبات مخزون نهاية المدة الحقيقي (Sf)
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#fbbf24;font-weight:700;margin-bottom:8px;">بضاعة + مواد + تموينات</p>
+            <div class="highlight amber">
+              حـ/30 أو 31 أو 32 مدين<br>
+              ← حـ/600 أو 601 أو 602 دائن<br>
+              <em>إثبات المخزون الحقيقي (بعد الجرد المادي)</em>
+            </div>
+          </div>
+          <div>
+            <p style="color:#2dd4bf;font-weight:700;margin-bottom:8px;">منتجات</p>
+            <div class="highlight green">
+              حـ/33، 35 مدين<br>
+              ← حـ/72 دائن<br>
+              <em>إثبات مخزون المنتجات النهائي</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📐</div>مثال شامل — الجرد المتناوب
+        </div>
+        <div class="highlight blue" style="margin-bottom:14px;">
+          <strong>بيانات مؤسسة الرياض 2024:</strong><br>
+          • مخزون أول المدة: مواد أولية 190.000 دج، تموينات أخرى 39.200 دج، منتجات تامة 277.000 دج<br>
+          • مشتريات الفترة: مواد أولية 300.000 دج بشيك، تموينات أخرى 77.600 دج نقدًا (TVA 19%)<br>
+          • مخزون نهاية المدة (الجرد المادي): مواد أولية 52.600 دج، تموينات أخرى 25.400 دج، منتجات تامة 231.200 دج
+        </div>
+        <p style="color:#94a3b8;margin-bottom:12px;font-size:13px;">قيود الشراء خلال السنة (سجلت من قبل):</p>
+        <div class="journal-table">
+          <div class="j-row header">
+            <div class="j-acc">ح</div>
+            <div class="j-label">البيان</div>
+            <div class="j-d">مدين</div>
+            <div class="j-c">دائن</div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">381</div>
+            <div class="j-label">مشتريات مواد أولية مخزنة</div>
+            <div class="j-d">300.000</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">4456</div>
+            <div class="j-label">TVA مسترجعة</div>
+            <div class="j-d">57.000</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">512</div>
+            <div class="j-label">البنك</div>
+            <div class="j-c">357.000</div>
+            <div class="j-d"></div>
+          </div>
+          <div class="j-row sub">
+            <div class="j-acc">382</div>
+            <div class="j-label">مشتريات تموينات أخرى</div>
+            <div class="j-d">77.600</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">4456</div>
+            <div class="j-label">TVA مسترجعة</div>
+            <div class="j-d">14.744</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">53</div>
+            <div class="j-label">الصندوق</div>
+            <div class="j-c">92.344</div>
+            <div class="j-d"></div>
+          </div>
+        </div>
+        <p style="color:#34d399;margin:16px 0 8px;font-weight:700;">قيود التسوية في 31/12/2024:</p>
+        <div class="journal-table">
+          <div class="j-row header">
+            <div class="j-acc">ح</div>
+            <div class="j-label">البيان</div>
+            <div class="j-d">مدين</div>
+            <div class="j-c">دائن</div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">601</div>
+            <div class="j-label">مواد أولية مستهلكة (Si)</div>
+            <div class="j-d">190.000</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">602</div>
+            <div class="j-label">تموينات أخرى مستهلكة (Si)</div>
+            <div class="j-d">39.200</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">31</div>
+            <div class="j-label">مواد أولية (Si)</div>
+            <div class="j-c">190.000</div>
+            <div class="j-d"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">32</div>
+            <div class="j-label">تموينات أخرى (Si)</div>
+            <div class="j-c">39.200</div>
+            <div class="j-d"></div>
+          </div>
+          <div class="j-row sub">
+            <div class="j-acc">72</div>
+            <div class="j-label">الإنتاج المخزن — إلغاء Si للمنتجات</div>
+            <div class="j-d">277.000</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">35</div>
+            <div class="j-label">منتجات تامة (Si)</div>
+            <div class="j-c">277.000</div>
+            <div class="j-d"></div>
+          </div>
+          <div class="j-row sub">
+            <div class="j-acc">601</div>
+            <div class="j-label">مواد أولية مستهلكة — ترصيد حـ/381</div>
+            <div class="j-d">300.000</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">602</div>
+            <div class="j-label">تموينات أخرى مستهلكة — ترصيد حـ/382</div>
+            <div class="j-d">77.600</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">381</div>
+            <div class="j-label">مشتريات مواد أولية</div>
+            <div class="j-c">300.000</div>
+            <div class="j-d"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">382</div>
+            <div class="j-label">مشتريات تموينات أخرى</div>
+            <div class="j-c">77.600</div>
+            <div class="j-d"></div>
+          </div>
+          <div class="j-row sub">
+            <div class="j-acc">31</div>
+            <div class="j-label">مواد أولية (Sf الحقيقي)</div>
+            <div class="j-d">52.600</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">32</div>
+            <div class="j-label">تموينات أخرى (Sf)</div>
+            <div class="j-d">25.400</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">601</div>
+            <div class="j-label">مواد أولية مستهلكة</div>
+            <div class="j-c">52.600</div>
+            <div class="j-d"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">602</div>
+            <div class="j-label">تموينات أخرى مستهلكة</div>
+            <div class="j-c">25.400</div>
+            <div class="j-d"></div>
+          </div>
+          <div class="j-row sub">
+            <div class="j-acc">35</div>
+            <div class="j-label">منتجات تامة (Sf)</div>
+            <div class="j-d">231.200</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">72</div>
+            <div class="j-label">الإنتاج المخزن</div>
+            <div class="j-c">231.200</div>
+            <div class="j-d"></div>
+          </div>
+        </div>
+        <div class="formula-box">
+          تكلفة البضاعة المباعة = Si + المشتريات – Sf<br>
+          مواد أولية مستهلكة = 190.000 + 300.000 – 52.600 = 437.400 دج
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h4>✅ جدول ملخص قيود الجرد المتناوب</h4>
+        <ul>
+          <li>خطوة 1: إلغاء Si → حـ/600-602 مدين | حـ/30-32 دائن (وللمنتجات: حـ/72 مدين | حـ/33-35 دائن)</li>
+          <li>خطوة 2: ترصيد حـ/38 → حـ/600-602 مدين | حـ/380-382 دائن</li>
+          <li>خطوة 3: إثبات Sf → حـ/30-32 مدين | حـ/600-602 دائن (وللمنتجات: حـ/33-35 مدين | حـ/72 دائن)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- =================== LESSON 10: الزبائن المشكوك فيهم بالتفصيل =================== -->
+    <div class="lesson-section l3" id="lesson-9">
+      <div class="lesson-header">
+        <div class="lesson-num">10</div>
+        <div class="lesson-title-wrap">
+          <h2>الزبائن المشكوك فيهم وخسائر القيمة</h2>
+          <p>التحويل، تشكيل المؤونة، المراجعة، الديون المعدومة — بالأمثلة الكاملة</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">👥</div>تصنيف الزبائن
+        </div>
+        <table class="compare-table">
+          <tr>
+            <th>النوع</th>
+            <th>الوضعية</th>
+            <th>الإجراء</th>
+          </tr>
+          <tr>
+            <td>زبون عادي (حـ/411)</td>
+            <td>وضعه المالي جيد</td>
+            <td>لا إجراء خاص</td>
+          </tr>
+          <tr>
+            <td>زبون مشكوك فيه (حـ/416)</td>
+            <td>عسر مالي — احتمال عدم التسديد</td>
+            <td>تحويل + تشكيل خسارة قيمة</td>
+          </tr>
+          <tr>
+            <td>دين معدوم</td>
+            <td>إفلاس نهائي</td>
+            <td>ترصيد الحساب وتحميل الخسارة</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📐</div>حساب خسارة القيمة
+        </div>
+        <div class="formula-box">
+          خسارة القيمة = (مبلغ الدين TTC ÷ 1.19) × النسبة%<br><br>
+          أو: الدين HT × النسبة%<br><br>
+          <strong>مثال:</strong> دين TTC = 119.000 دج — خسارة 20%<br>
+          الدين HT = 119.000 ÷ 1.19 = 100.000 دج<br>
+          خسارة القيمة = 100.000 × 20% = 20.000 دج
+        </div>
+        <div class="highlight amber">⚠️ خسارة القيمة دائمًا على الجزء HT (خارج الرسم) — لأن TVA لم تُدفع للدولة بعد
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">1️⃣</div>المرحلة الأولى: التحويل إلى مشكوك فيه
+        </div>
+        <div class="journal-table">
+          <div class="j-row header">
+            <div class="j-acc">ح</div>
+            <div class="j-label">البيان</div>
+            <div class="j-d">مدين</div>
+            <div class="j-c">دائن</div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">416</div>
+            <div class="j-label">الزبائن المشكوك فيهم</div>
+            <div class="j-d">119.000</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">411</div>
+            <div class="j-label">الزبائن</div>
+            <div class="j-c">119.000</div>
+            <div class="j-d"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">2️⃣</div>المرحلة الثانية: تشكيل خسارة القيمة
+        </div>
+        <div class="journal-table">
+          <div class="j-row header">
+            <div class="j-acc">ح</div>
+            <div class="j-label">البيان</div>
+            <div class="j-d">مدين</div>
+            <div class="j-c">دائن</div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">685</div>
+            <div class="j-label">مخصصات الاهتالكات والمؤونات وخسائر القيمة — أصول جارية</div>
+            <div class="j-d">20.000</div>
+            <div class="j-c"></div>
+          </div>
+          <div class="j-row">
+            <div class="j-acc">491</div>
+            <div class="j-label">خسائر القيمة عن حسابات الزبائن</div>
+            <div class="j-c">20.000</div>
+            <div class="j-d"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">3️⃣</div>المراجعة في السنة الموالية — الحالات الممكنة
+        </div>
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-num">أ</div>
+            <div class="step-content">
+              <strong>تحسّنت الوضعية → تخفيض أو إلغاء الخسارة</strong>
+              <span>حـ/491 مدين ← حـ/785 (استرجاع خسائر القيمة — أصول جارية) دائن</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">ب</div>
+            <div class="step-content">
+              <strong>تدهورت الوضعية → رفع الخسارة</strong>
+              <span>حـ/685 مدين ← حـ/491 دائن (بالفرق بين الخسارة الجديدة والقديمة)</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">ج</div>
+            <div class="step-content">
+              <strong>إفلاس الزبون (دين معدوم)</strong>
+              <span>انظر القيد التفصيلي أدناه</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">💀</div>الدين المعدوم — حالتان
+        </div>
+        <p style="color:#94a3b8;margin-bottom:14px;font-size:13px;">بعد تسجيل مبلغ التسديد الجزئي (إن وجد) بـ حـ/512
+          مدين ← حـ/416 دائن، نُرصّد الباقي:</p>
+        <div class="two-col">
+          <div>
+            <p style="color:#f87171;font-weight:700;margin-bottom:8px;">الحالة 1: الخسارة الحقيقية ≤ المؤونة المشكّلة
+            </p>
+            <div class="highlight red">
+              حـ/654 خسائر عن ديون غير قابلة للتحصيل مدين<br>
+              حـ/491 خسائر القيمة مدين (المؤونة كاملة)<br>
+              حـ/4457 TVA محصلة مدين<br>
+              ← حـ/416 الزبائن المشكوك فيهم دائن (رصيد TTC)<br>
+              ← حـ/785 استرجاع خسائر القيمة دائن (إن كانت المؤونة > الخسارة)
+            </div>
+          </div>
+          <div>
+            <p style="color:#f87171;font-weight:700;margin-bottom:8px;">الحالة 2: خسارة حقيقية > المؤونة</p>
+            <div class="highlight red">
+              حـ/654 مدين (الفرق الإضافي)<br>
+              حـ/491 مدين (المؤونة كاملة)<br>
+              حـ/4457 TVA مدين<br>
+              ← حـ/416 دائن (رصيد TTC)<br>
+              <em>لا يوجد استرجاع</em>
+            </div>
+          </div>
+        </div>
+        <div class="highlight amber">⚠️ TVA تُسترجع من الدولة عند الدين المعدوم لأنها سُددت سابقًا عند البيع — لذلك
+          حـ/4457 يُجعل مدينًا</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📊</div>مثال متكامل مع زبائن متعددين
+        </div>
+        <div class="highlight blue" style="margin-bottom:14px;">
+          <strong>بيانات من ميزان المراجعة 31/12/2024:</strong><br>
+          • حـ/416 رصيد مدين = 254.660 دج<br>
+          • حـ/491 رصيد دائن = 107.000 دج<br><br>
+          <strong>الزبائن المشكوك فيهم:</strong><br>
+          • زبون A: دين TTC = 119.000 | خسارة 2023 = 20% | تسديد 2024 = 42.840 | وضعية 2024: يُحتمل عدم تسديد 40%<br>
+          • زبون B: دين TTC = 142.800 | خسارة 2023 = 24.000 | تسديد 2024 = 99.960 | أعلن إفلاسه<br>
+          • زبون C: مجهول — تسديد 2024 = 114.240 | يُحتمل تسديد 50% من الباقي
+        </div>
+        <div class="highlight amber" style="margin-bottom:12px;">
+          <strong>حل الزبون A:</strong><br>
+          خسارة 2023 = (119.000 ÷ 1.19) × 20% = 20.000 دج<br>
+          الرصيد بعد التسديد TTC = 119.000 – 42.840 = 76.160 دج<br>
+          الرصيد HT = 76.160 ÷ 1.19 = 64.000 دج<br>
+          الخسارة الجديدة = 64.000 × 40% = 25.600 دج<br>
+          الفرق = 25.600 – 20.000 = +5.600 (رفع المؤونة)<br>
+          → حـ/685 مدين 5.600 ← حـ/491 دائن 5.600
+        </div>
+        <div class="highlight red" style="margin-bottom:12px;">
+          <strong>حل الزبون B (إفلاس):</strong><br>
+          الرصيد بعد التسديد TTC = 142.800 – 99.960 = 42.840 دج<br>
+          الرصيد HT = 42.840 ÷ 1.19 = 36.000 دج<br>
+          TVA = 42.840 – 36.000 = 6.840 دج<br>
+          خسارة حقيقية HT = 36.000 > مؤونة 24.000 → خسارة إضافية 12.000<br><br>
+          القيد: حـ/654 مدين 12.000 + حـ/491 مدين 24.000 + حـ/4457 مدين 6.840 ← حـ/416 دائن 42.840
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h4>✅ خلاصة لا تنساها</h4>
+        <ul>
+          <li>الخسارة دائمًا على HT (÷ 1.19 إذا كان الدين TTC)</li>
+          <li>الفرق بين الخسارتين = تعديل المؤونة (رفع أو تخفيض)</li>
+          <li>عند الإفلاس: TVA تُرد للمؤسسة (حـ/4457 مدين)</li>
+          <li>حـ/654 تظهر في جانب الأعباء في حساب النتائج</li>
+          <li>حـ/785 تظهر في جانب النواتج في حساب النتائج</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- =================== LESSON 11: دراسة حالة متكاملة =================== -->
+    <div class="lesson-section l4" id="lesson-10">
+      <div class="lesson-header">
+        <div class="lesson-num">11</div>
+        <div class="lesson-title-wrap">
+          <h2>دراسة حالة متكاملة — مخزونات + نهاية دورة</h2>
+          <p>تطبيق جميع الدروس معًا في تمرين واحد كامل (السلسلة 5 — الأستاذ)</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📋</div>تسوية الإنتاج الجاري من التثبيتات
+        </div>
+        <div class="two-col">
+          <div>
+            <p style="color:#fbbf24;font-weight:700;margin-bottom:8px;">تثبيت يُنجزه الكيان لذاته</p>
+            <div class="highlight amber">
+              نُسجل المصاريف الفعلية أولًا (601، 631...) ثم:<br>
+              حـ/232 (تثبيتات عينية قيد الإنجاز) مدين<br>
+              ← حـ/732 (إنتاج مثبت لأصول عينية) دائن<br>
+              بمبلغ = مجموع المصاريف المنجزة
+            </div>
+          </div>
+          <div>
+            <p style="color:#2dd4bf;font-weight:700;margin-bottom:8px;">تثبيت مسند للغير (مقاول)</p>
+            <div class="highlight green">
+              عند وصول فاتورة أشغال جزئية:<br>
+              حـ/232 مدين<br>
+              ← حـ/512 أو حـ/404 دائن<br><br>
+              عند الاستلام النهائي:<br>
+              حـ/213 أو 215 مدين<br>
+              ← حـ/232 دائن + حـ/404 دائن (الباقي)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📊</div>تسوية مشتريات المخزونات في نهاية السنة (حـ/38 — الجرد الدائم)
+        </div>
+        <table class="compare-table">
+          <tr>
+            <th>الوضعية</th>
+            <th>المشكلة</th>
+            <th>القيد</th>
+          </tr>
+          <tr>
+            <td>رصيد مدين حـ/38</td>
+            <td>وصلت الفاتورة ولم تصل البضاعة</td>
+            <td>حـ/37 مدين ← حـ/38 دائن | ثم عند الاستلام: حـ/30 مدين ← حـ/37 دائن</td>
+          </tr>
+          <tr>
+            <td>رصيد دائن حـ/38</td>
+            <td>وصلت البضاعة ولم تصل الفاتورة</td>
+            <td>حـ/38 مدين + حـ/4456 مدين ← حـ/408 دائن | ثم عند الفاتورة: حـ/408 مدين ← حـ/401 دائن</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">🗓️</div>الأعباء والنواتج المثبتة مسبقًا — مثال عملي
+        </div>
+        <div class="highlight blue" style="margin-bottom:14px;">
+          <strong>01/04/2021:</strong> دفعت مؤسسة إيجار مخازن لسنة كاملة بـ 42.000 دج بشيك<br>
+          → قيد الدفع: حـ/613 مدين 42.000 ← حـ/512 دائن 42.000<br><br>
+          <strong>31/12/2021 (في نهاية السنة):</strong><br>
+          الجزء المتعلق بـ 2022 = 42.000 × 3/12 = 10.500 دج<br>
+          → حـ/486 مدين 10.500 ← حـ/613 دائن 10.500<br><br>
+          <strong>01/01/2022 (عكس تلقائي):</strong><br>
+          → حـ/613 مدين 10.500 ← حـ/486 دائن 10.500
+        </div>
+        <div class="highlight green">
+          <strong>01/07/2021:</strong> قبضت إيجار شاحنة لسنة كاملة بـ 36.000 دج<br>
+          → قيد القبض: حـ/512 مدين 36.000 ← حـ/706 دائن 36.000<br><br>
+          <strong>31/12/2021:</strong> الجزء المتعلق بـ 2022 = 36.000 × 6/12 = 18.000 دج<br>
+          → حـ/706 مدين 18.000 ← حـ/487 دائن 18.000<br><br>
+          <strong>01/01/2022 (عكس):</strong><br>
+          → حـ/487 مدين 18.000 ← حـ/706 دائن 18.000
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📈</div>إعداد جدول حساب النتائج — المنهجية
+        </div>
+        <table class="compare-table">
+          <tr>
+            <th>البند</th>
+            <th>الحسابات المعنية</th>
+            <th>الموضع في الجدول</th>
+          </tr>
+          <tr>
+            <td>رقم الأعمال</td>
+            <td>700+701+706+709-</td>
+            <td>الإنتاج السنوي</td>
+          </tr>
+          <tr>
+            <td>تغير المخزون</td>
+            <td>حـ/72 (مدين أو دائن)</td>
+            <td>يُضاف أو يُطرح من الإنتاج</td>
+          </tr>
+          <tr>
+            <td>الإنتاج المثبت</td>
+            <td>حـ/73</td>
+            <td>يُضاف للإنتاج</td>
+          </tr>
+          <tr>
+            <td>المشتريات المستهلكة</td>
+            <td>600+601+602-609</td>
+            <td>الاستهلاكات</td>
+          </tr>
+          <tr>
+            <td>الخدمات الخارجية</td>
+            <td>حـ/61، 62</td>
+            <td>الاستهلاكات</td>
+          </tr>
+          <tr>
+            <td>المخصصات</td>
+            <td>681+685</td>
+            <td>النتيجة العملياتية</td>
+          </tr>
+          <tr>
+            <td>ضريبة على الأرباح IBS</td>
+            <td>النتيجة قبل الضريبة × 19%</td>
+            <td>تُطرح للحصول على النتيجة الصافية</td>
+          </tr>
+        </table>
+        <div class="formula-box">
+          النتيجة الصافية = الإيرادات الكلية – الأعباء الكلية – IBS<br>
+          IBS = النتيجة العادية قبل الضريبة × 19%
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h4>✅ الترتيب الصحيح لإجراء قيود نهاية الدورة</h4>
+        <ul>
+          <li>1. إهتالك التثبيتات وخسائر القيمة عن التثبيتات</li>
+          <li>2. الإنتاج الجاري من التثبيتات (حـ/232 ← حـ/732)</li>
+          <li>3. تسوية المخزونات (فوارق الجرد، خسائر القيمة، حـ/37، حـ/408، حـ/418)</li>
+          <li>4. المنتجات الجارية الإنجاز (حـ/331 ← حـ/723)</li>
+          <li>5. تسوية حسابات الزبائن (تحويل → خسارة القيمة → ديون معدومة)</li>
+          <li>6. الأعباء والنواتج المثبتة مسبقًا (حـ/486 و حـ/487)</li>
+          <li>7. ضريبة على الأرباح IBS (حـ/695 ← حـ/444)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- end main -->
+
+  <script>
+    const lessons = document.querySelectorAll('.lesson-section');
+    const navBtns = document.querySelectorAll('.nav-btn');
+
+    function showLesson(idx) {
+      lessons.forEach((l, i) => l.classList.toggle('active', i === idx));
+      navBtns.forEach((b, i) => b.classList.toggle('active', i === idx));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+
+</html>
